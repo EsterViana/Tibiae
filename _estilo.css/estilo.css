@@ -1,0 +1,133 @@
+ 
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+
+body {
+    background: url("../_img/fundo-musical-flauta.jpg");
+    background-color: white;      
+    color: black;
+ }
+ 
+ div#interface {
+    width: 1050px;
+    height: 2680px;
+    background-color: rgb(213 , 213, 255);
+    margin: -22px auto 10px auto;
+    box-shadow: 0px 0px 10px rgba(240, 131, 225, 0.5);
+    padding: 10px; 
+}
+
+header#cabecalho {
+    border-bottom: 1px solid #606060;
+    height: 150px;
+    background: url(../_img/tibiae-logo.png) no-repeat 0px 95px;
+    
+}
+
+header#cabecalho h1 {
+    font-family: Arial, sans-serif;
+    font-size: 30pt;
+    color: rgb(87, 17, 87);
+    text-shadow: 1px 1px 3px rgb(53, 7, 53);
+    padding: 0;
+    margin-bottom: 2px;
+}
+
+header#cabecalho h3 {
+   font-family: 'Indie Flower', cursive;
+    font-size: 20pt;
+    color: rgb(87, 28, 87);
+    margin-top: 0;
+}
+
+ header#cabecalho img#icone {
+    position: absolute;
+    left: 935px;
+    top: 20px;
+}
+
+nav #menu {
+    display: block;
+}
+
+nav #nav1 {
+    list-style: none;
+    text-transform: uppercase;
+    position: relative;
+    top: -140px;
+    left: 300px;
+}
+
+ nav #nav1 li {
+    display: inline-block;
+    background-color: purple;
+    padding: 10px;
+    margin: 3px; 
+    transition: 3s;
+}
+
+nav #nav1 li:hover {
+    background-color: rgb(219, 114, 114);
+}
+
+nav #nav1 a {
+    color: rgb(194, 171, 129);
+    text-decoration: none;
+}
+
+nav #nav1 a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+h3.titulo {
+    font-size: 20pt;
+    color: purple;
+}
+
+p {
+    font-family: 'Indie Flower', cursive;
+    font-size: 23pt;
+     text-align: center;
+     text-indent: 50px;
+     color: black;
+ }
+ 
+ figure.foto-legenda{
+     
+     border: 4px outset rgb(218, 218, 231);
+     box-shadow: 3px 3px 10px rgb(120, 120, 233);
+     display: inline-block;
+     position: relative;
+     
+ }
+
+ figure.foto-legenda img {
+
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.5);
+     width: 100%;
+     height: 100%;
+ }
+
+ figure.foto-legenda figcaption {
+     opacity: 0 ;
+    position: absolute;
+    top: 0px;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    font-size: 30pt;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    transition: 1s;
+ } 
+
+figure.foto-legenda:hover figcaption {
+    opacity: 1;
+}
+
+footer#rodape p {
+    border-top: 1px solid black;
+}
+
