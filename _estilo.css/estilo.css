@@ -5,8 +5,9 @@ body {
     background: url("../_img/fundo-musical-flauta.jpg");
     background-color: white;      
     color: black;
+    position: fixed 50%;
  }
- 
+
  div#interface {
     width: 1050px;
     height: 2680px;
@@ -129,5 +130,6 @@ figure.foto-legenda:hover figcaption {
 
 footer#rodape p {
     border-top: 1px solid black;
+    color: purple;
 }
 
