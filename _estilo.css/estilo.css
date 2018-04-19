@@ -5,7 +5,7 @@ body {
     background: url("../_img/fundo-musical-flauta.jpg");
     background-color: white;      
     color: black;
-    position: fixed 50%;
+   
  }
 
  div#interface {
@@ -44,6 +44,12 @@ header#cabecalho h3 {
     position: absolute;
     left: 935px;
     top: 20px;
+}
+
+#gif a img {
+    position: relative;
+    top: -99px;
+    left: 950px;
 }
 
 nav #menu {
@@ -132,4 +138,5 @@ footer#rodape p {
     border-top: 1px solid black;
     color: purple;
 }
+
 
