@@ -6,7 +6,7 @@ body {
     background-color: white;      
     color: black;
    
- }
+}
 
  div#interface {
     width: 1050px;
@@ -34,7 +34,7 @@ header#cabecalho h1 {
 }
 
 header#cabecalho h3 {
-   font-family: 'Indie Flower', cursive;
+    font-family: 'Indie Flower', cursive;
     font-size: 20pt;
     color: rgb(87, 28, 87);
     margin-top: 0;
@@ -48,8 +48,8 @@ header#cabecalho h3 {
 
 #gif a img {
     position: relative;
-    top: -99px;
-    left: 950px;
+    top: -76px;
+    left: 920px;
 }
 
 nav #menu {
@@ -94,17 +94,17 @@ h3.titulo {
 p {
     font-family: 'Indie Flower', cursive;
     font-size: 23pt;
-     text-align: center;
-     text-indent: 50px;
-     color: black;
+    text-align: center;
+    text-indent: 50px;
+    color: black;
  }
  
  figure.foto-legenda{
      
-     border: 4px outset rgb(218, 218, 231);
-     box-shadow: 3px 3px 10px rgb(120, 120, 233);
-     display: inline-block;
-     position: relative;
+    border: 4px outset rgb(218, 218, 231);
+    box-shadow: 3px 3px 10px rgb(120, 120, 233);
+    display: inline-block;
+    position: relative;
      
  }
 
@@ -112,12 +112,12 @@ p {
 
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.5);
-     width: 100%;
-     height: 100%;
+    width: 100%;
+    height: 100%;
  }
 
  figure.foto-legenda figcaption {
-     opacity: 0 ;
+    opacity: 0 ;
     position: absolute;
     top: 0px;
     background-color: rgba(0, 0, 0, 0.4);
