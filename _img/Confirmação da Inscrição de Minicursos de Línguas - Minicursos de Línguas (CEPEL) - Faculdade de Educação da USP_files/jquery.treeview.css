@@ -1,0 +1,175 @@
+/** 
+ * Estilos referentes ao Treeview em JQuery
+ * Data Criação: 22/09/2010
+ * Autor da Criação: Fernando Faria
+ * Data Última Alteração: 22/09/2010
+ * Autor da Alteração: Fernando Faria
+ * Versão: 1
+ */
+
+/** Estrutura do Treeview **/
+.treeview, .treeview ul { 
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.treeview ul {
+	background-color: white;
+	margin-top: 4px;
+}
+
+.treeview .hitarea {
+	background: url(../../../imagens/jquery/treeview/treeview-default.gif) -64px -25px no-repeat;
+	cursor: pointer;
+	float: left;
+	height: 16px;
+	width: 16px;
+	margin-left: -20px;
+}
+/* fix for IE6 */
+* html .hitarea {
+	display: inline;
+	float:none;
+}
+
+.treeview li { 
+	color: #333333;
+	font-size: 12px;
+	font-weight: normal;
+	margin: 0px;
+	padding-bottom: 3px;
+	padding-left: 20px;
+	padding-right: 0px;
+	padding-top: 3px;
+}
+
+.treeview a {
+	color: #333333;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+.treeview a.selected {
+	color: #000066;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.treeview span {
+	color: #000066;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+#treecontrol { 
+	display: none; 
+	margin: 16px 0; 
+}
+
+.treeview .hover { 
+	color: #000066;
+	cursor: pointer; 
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.treeview li { 
+	background: url(../../../imagens/jquery/treeview/treeview-default-line.gif) 0 0 no-repeat; 
+}
+
+.treeview li.collapsable, .treeview li.expandable { 
+	background-position: 0 -176px; 
+}
+
+.treeview .expandable-hitarea { 
+	background-position: -80px -3px; 
+}
+
+.treeview li.last { 
+	background-position: 0 -1766px 
+}
+
+.treeview li.lastCollapsable, .treeview li.lastExpandable { 
+	background-image: url(../../imagens/jquery/treeview/treeview-default.gif); 
+} 
+ 
+.treeview li.lastCollapsable { 
+	background-position: 0 -111px 
+}
+
+.treeview li.lastExpandable { 
+	background-position: -32px -67px 
+}
+
+.treeview div.lastCollapsable-hitarea, .treeview div.lastExpandable-hitarea { 
+	background-position: 0; 
+}
+
+/** Cores do Treeview **/
+/* Vermelho */
+.treeview-red li { 
+	background-image: url(../../../imagens/jquery/treeview/treeview-red-line.gif); 
+}
+
+.treeview-red .hitarea, .treeview-red li.lastCollapsable, .treeview-red li.lastExpandable { 
+	background-image: url(../../../imagens/jquery/treeview/treeview-red.gif); 
+} 
+
+/* Preto */
+.treeview-black li { 
+	background-image: url(../../../imagens/jquery/treeview/treeview-black-line.gif); 
+}
+
+.treeview-black .hitarea, .treeview-black li.lastCollapsable, .treeview-black li.lastExpandable { 
+	background-image: url(../../../imagens/jquery/treeview/treeview-black.gif); 
+}  
+
+/* Cinza */
+.treeview-gray li { 
+	background-image: url(../../../imagens/jquery/treeview/treeview-gray-line.gif); 
+}
+
+.treeview-gray .hitarea, .treeview-gray li.lastCollapsable, .treeview-gray li.lastExpandable { 
+	background-image: url(../../../imagens/jquery/treeview/treeview-gray.gif); 
+} 
+
+/* FamFamFam */
+.treeview-famfamfam li { 
+	background-image: url(../../../imagens/jquery/treeview/treeview-famfamfam-line.gif); 
+}
+
+.treeview-famfamfam .hitarea, .treeview-famfamfam li.lastCollapsable, .treeview-famfamfam li.lastExpandable { 
+	background-image: url(../../../imagens/jquery/treeview/treeview-famfamfam.gif); 
+} 
+
+/* Menu (Azul - 000066) */
+.treeview-menu li { 
+	background-image: url(../../../imagens/jquery/treeview/treeview-menu-line.gif); 
+}
+
+.treeview-menu .hitarea, .treeview-menu li.lastCollapsable, .treeview-menu li.lastExpandable { 
+	background-image: url(../../../imagens/jquery/treeview/treeview-menu.gif); 
+} 
+
+/* Estrutura de Diretório */
+.filetree li { 
+	padding: 3px 0 2px 16px; 
+}
+
+.filetree span.folder, .filetree span.file { 
+	display: block; 
+	padding: 1px 0 1px 16px; 
+}
+
+.filetree span.folder { 
+	background: url(../../../imagens/jquery/treeview/folder.gif) 0 0 no-repeat; 
+}
+
+.filetree li.expandable span.folder { 
+	background: url(../../../imagens/jquery/treeview/folder-closed.gif) 0 0 no-repeat; 
+}
+
+.filetree span.file { 
+	background: url(../../../imagens/jquery/treeview/file.gif) 0 0 no-repeat; 
+}

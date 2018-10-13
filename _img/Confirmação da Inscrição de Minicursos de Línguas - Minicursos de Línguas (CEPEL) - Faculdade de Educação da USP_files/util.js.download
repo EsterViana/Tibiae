@@ -1,0 +1,2976 @@
+	/** 
+	 * Arquivo de Funções Utilitárias de JavaScript para o Sistema
+	 * Data Criação: 17/03/2009
+	 * Autor da Criação: Fernando Faria
+	 * Data Última Alteração: 05/06/2018
+	 * Autor da Alteração: Fernando Faria
+	 * Versão: 20
+	 */
+ 
+ 	
+	/*** Funções de identificação de navegadores ***/
+	// Função que retorna se o navegador é Internet Explorer
+	function Navegador_IE() {
+ 		var SNavegador_Nome = navigator.appName;
+		if ( SNavegador_Nome === "Microsoft Internet Explorer" )
+			return true;
+		else 
+			return false;
+	}
+
+
+	/*** Funções de identificação de componentes HTML ***/
+	// Função que retorna o objeto HTML a partir do seu tabindex
+	function getObjetoHTML_TabIndex(iTabIndex, objCampo) {
+        var objParent, bLocalizarProximo_Campo, i;
+		var lstObjetos = getObjetoHTML_Tag("select");
+		for (i = 0; i < lstObjetos.length; i++) {
+			if (lstObjetos[i].tabIndex == iTabIndex) {
+				if (lstObjetos[i].disabled == false) {
+                    bLocalizarProximo_Campo = false;
+                    if (lstObjetos[i].style.display == "none")
+                        bLocalizarProximo_Campo = true;
+                    objParent = lstObjetos[i].parentNode;
+                    while (typeof(objParent) != "undefined" && typeof(objParent.style) != "undefined" && bLocalizarProximo_Campo == false) {
+                        if (objParent.style.display == "none")
+                            bLocalizarProximo_Campo = true;
+                        objParent = objParent.parentNode;
+                    }
+                    if (bLocalizarProximo_Campo)
+                        return getObjetoHTML_TabIndex(parseInt(lstObjetos[i].tabIndex) + 1, lstObjetos[i]);
+                    else
+                        return lstObjetos[i];
+                } else
+					return getObjetoHTML_TabIndex(parseInt(lstObjetos[i].tabIndex) + 1, lstObjetos[i]);
+			}
+		}
+		lstObjetos = getObjetoHTML_Tag("input");
+		for (i = 0; i < lstObjetos.length; i++) {
+			if (lstObjetos[i].tabIndex == iTabIndex) {
+				if (lstObjetos[i].disabled == false) {
+                    bLocalizarProximo_Campo = false;
+                    if (lstObjetos[i].style.display == "none")
+                        bLocalizarProximo_Campo = true;
+                    objParent = lstObjetos[i].parentNode;
+                    while (typeof(objParent) != "undefined" && typeof(objParent.style) != "undefined" && bLocalizarProximo_Campo == false) {
+                        if (objParent.style.display == "none")
+                            bLocalizarProximo_Campo = true;
+                        objParent = objParent.parentNode;
+                    }
+                    if (bLocalizarProximo_Campo)
+                        return getObjetoHTML_TabIndex(parseInt(lstObjetos[i].tabIndex) + 1, lstObjetos[i]);
+                    else {
+                        if (lstObjetos[i].type == "radio") {
+                            if (lstObjetos[i].checked == true)
+                                return lstObjetos[i];
+                            else {
+                                if (lstObjetos[i].name != objCampo.name) {
+                                    for (var j = 0; j < lstObjetos.length; j++) {
+                                        if (lstObjetos[j].type == "radio" && lstObjetos[j].disabled == false && lstObjetos[j].checked == true 
+                                                && lstObjetos[j].name == lstObjetos[i].name)
+                                            return lstObjetos[j];
+                                    }
+                                    lstObjetos[i].checked = true;
+                                    return lstObjetos[i];
+                                } else
+                                    return getObjetoHTML_TabIndex(parseInt(lstObjetos[i].tabIndex) + 1, lstObjetos[i]);
+                            }
+                        } else
+                            return lstObjetos[i];
+                    }
+				} else {
+					return getObjetoHTML_TabIndex(parseInt(lstObjetos[i].tabIndex) + 1, lstObjetos[i]);
+				}
+			}
+		}
+		lstObjetos = getObjetoHTML_Tag("button");
+		for (i = 0; i < lstObjetos.length; i++) {
+			if (lstObjetos[i].tabIndex == iTabIndex) {
+				if (lstObjetos[i].disabled == false) {
+                    bLocalizarProximo_Campo = false;
+                    if (lstObjetos[i].style.display === "none")
+                        bLocalizarProximo_Campo = true;
+                    objParent = lstObjetos[i].parentNode;
+                    while (typeof(objParent) != "undefined" && typeof(objParent.style) != "undefined" && bLocalizarProximo_Campo == false) {
+                        if (objParent.style.display === "none")
+                            bLocalizarProximo_Campo = true;
+                        objParent = objParent.parentNode;
+                    }
+                    if (bLocalizarProximo_Campo)
+                        return getObjetoHTML_TabIndex(parseInt(lstObjetos[i].tabIndex) + 1, lstObjetos[i]);
+                    else
+                        return lstObjetos[i];
+				} else {
+					return getObjetoHTML_TabIndex(parseInt(lstObjetos[i].tabIndex) + 1, lstObjetos[i]);
+                }
+			}
+		}
+		lstObjetos = getObjetoHTML_Tag("textarea");
+		for (i = 0; i < lstObjetos.length; i++) {
+			if (lstObjetos[i].tabIndex == iTabIndex) {
+				if (lstObjetos[i].disabled == false) {
+                    bLocalizarProximo_Campo = false;
+                    if (lstObjetos[i].style.display == "none")
+                        bLocalizarProximo_Campo = true;
+                    objParent = lstObjetos[i].parentNode;
+                    while (typeof(objParent) != "undefined" && typeof(objParent.style) != "undefined" && bLocalizarProximo_Campo == false) {
+                        if (objParent.style.display == "none")
+                            bLocalizarProximo_Campo = true;
+                        objParent = objParent.parentNode;
+                    }
+                    if (bLocalizarProximo_Campo)
+                        return getObjetoHTML_TabIndex(parseInt(lstObjetos[i].tabIndex) + 1, lstObjetos[i]);
+                    else
+                        return lstObjetos[i];
+                } else
+					return getObjetoHTML_TabIndex(parseInt(lstObjetos[i].tabIndex) + 1, lstObjetos[i]);
+			}
+		}
+		return objCampo;
+	}
+	
+	// Função que retorna o objeto HTML a partir de sua Tag dentro de toda a página ou partir de um objeto HTML
+	function getObjetoHTML_Tag(STag) {
+		return document.getElementsByTagName(STag);
+	}
+	
+	// Função que retorna o objeto HTML a partir do seu nome
+	function getObjetoHTML(SObjetoNome) {
+		if (document.getElementById)
+			return document.getElementById(SObjetoNome);
+		if (document.all)
+			return document.all[SObjetoNome];
+		if (document.layers)
+			return document.layers[SObjetoNome];
+	}
+	
+	function getObjetoHTML_Evento(Evento) {
+		if (Evento.target) {
+			return Evento.target;
+		} else {
+			if (Evento.srcElement)
+				return Evento.srcElement;
+		}
+	}
+	
+	/*** Função para Centralizar ***/
+	function Centralizar_Tela(Evento) {
+		if (document.body.clientWidth < 939) {
+			getObjetoHTML("pagina").style.left = "0";
+			getObjetoHTML("pagina").style.marginLeft = "0";
+		} else {
+			getObjetoHTML("pagina").style.left = "50%";
+			getObjetoHTML("pagina").style.marginLeft = "-470px";
+		}
+	}
+	
+	function Abrir_Janela(STipo_Janela, SMensagem, SCampo_Foco, SAcao_Confirmacao) {
+		switch (STipo_Janela) {
+			case "confirmacao":
+				STitulo_Mensagem = "Confirmação da Operação";
+				SIcone = "<span class='ui-icon ui-icon-help' style='float:left; margin:0 8px 20px 0;'></span>";
+				break;
+			case "sucesso":
+				STitulo_Mensagem = "Sucesso da Operação";
+				SIcone = "<span class='ui-icon ui-icon-check' style='float:left; margin:0 8px 20px 0;'></span>";
+				break;
+			case "validacao":
+				STitulo_Mensagem = "Validação dos Dados";
+				SIcone = "<span class='ui-icon ui-icon-alert' style='float:left; margin:0 8px 20px 0;'></span>";
+				break;
+			case "erro":
+				STitulo_Mensagem = "Erro do Sistema";
+				SIcone = "<span class='ui-icon ui-icon-circle-close' style='float:left; margin:0 8px 20px 0;'></span>";
+				break;
+		}
+		if (STipo_Janela == "confirmacao") {
+			$("#janela").removeClass();
+			getObjetoHTML("janela").style.visibility = "visible";
+			getObjetoHTML("janela").innerHTML = SIcone + SMensagem;
+			$.fx.speeds._default = 1000;
+			$("#janela").dialog({
+				dialogClass: STipo_Janela,
+				modal: true,
+				width: 500,
+				show: "scale",
+				title: STitulo_Mensagem,
+				buttons: {
+					Sim: function() {
+						$(this).dialog("close");
+						$(this).dialog("destroy");
+						$("#janela").removeClass();
+						getObjetoHTML("janela").innerHTML="";
+						getObjetoHTML(SCampo_Foco).focus();
+						Acao(SAcao_Confirmacao);
+					},
+					Não: function() {
+						$(this).dialog("close");
+						$(this).dialog("destroy");
+						$("#janela").removeClass();
+						getObjetoHTML("janela").innerHTML="";
+						getObjetoHTML(SCampo_Foco).focus();
+					}
+				}
+			});
+		} else {
+			$("#janela").removeClass();
+			getObjetoHTML("janela").style.visibility = "visible";
+			getObjetoHTML("janela").innerHTML = SIcone + SMensagem;
+			$.fx.speeds._default = 1000;
+			$("#janela").dialog({
+				dialogClass: STipo_Janela,
+				modal: true,
+				width: 500,
+				show: "scale",
+				title: STitulo_Mensagem,
+				buttons: {
+					Ok: function() {
+						$(this).dialog("close");
+						$(this).dialog("destroy");
+						$("#janela").removeClass();
+						getObjetoHTML("janela").innerHTML="";
+						getObjetoHTML(SCampo_Foco).focus();
+					}
+				}
+			});
+		}
+	}
+	
+	function Abrir_Janela_Bootstrap(STipo_Janela, SMensagem, SCampo_Foco, SAcao_Confirmacao) {
+		switch (STipo_Janela) {
+			case "confirmacao":
+				STitulo_Mensagem = "Confirmação da Operação";
+				STipo = BootstrapDialog.TYPE_PRIMARY;
+				SBotao_Classe = "btn btn-primary";
+				SIcone = "<span class='fas fa-question-circle text-primary' style='margin-right: 5px'></span>";
+				break;
+			case "sucesso":
+				STitulo_Mensagem = "Sucesso da Operação";
+				STipo = BootstrapDialog.TYPE_SUCCESS;
+				SBotao_Classe = "btn btn-success";
+				SIcone = "<span class='fas fa-check-circle text-success' style='margin-right: 5px'></span>";
+				break;
+			case "validacao":
+				if (SMensagem.indexOf(":") != -1) {
+					STitulo_Mensagem = SMensagem.substring(0, SMensagem.indexOf(":"));
+					SMensagem = SMensagem.substring(SMensagem.indexOf(":") + 2);
+				} else
+					STitulo_Mensagem = "Validação dos Dados";
+				
+				STipo = BootstrapDialog.TYPE_WARNING;
+				SBotao_Classe = "btn btn-warning";
+				SIcone = "<span class='fas fa-exclamation-triangle text-warning' style='margin-right: 5px'></span>";
+				break;
+			case "erro":
+				STitulo_Mensagem = "Erro do Sistema";
+				STipo = BootstrapDialog.TYPE_DANGER;
+				SBotao_Classe = "btn btn-danger";
+				SIcone = "<span class='far fa-trash-alt text-danger' style='margin-right: 5px'></span>";
+				break;
+		}
+		if (STipo_Janela == "confirmacao") {
+			BootstrapDialog.show({
+                type: STipo,
+                title: STitulo_Mensagem,
+                message: SIcone + SMensagem,
+				closable: false,
+				buttons: [{
+					label: 'Sim',
+					cssClass: SBotao_Classe,
+					action: function(dialogRef) {
+						dialogRef.close();
+						getObjetoHTML(SCampo_Foco).focus();
+						Acao(SAcao_Confirmacao);
+					}
+				}, {
+					label: 'Não',
+					action: function(dialogRef){
+						dialogRef.close();
+						getObjetoHTML(SCampo_Foco).focus();
+					}
+				}]
+            });
+		} else {
+			BootstrapDialog.show({
+                type: STipo,
+                title: STitulo_Mensagem,
+                message: SIcone + SMensagem,
+				closable: false,
+				buttons: [{
+					label: 'Ok',
+					cssClass: SBotao_Classe,
+					action: function(dialogRef) {
+						dialogRef.close();
+						getObjetoHTML(SCampo_Foco).focus();
+					}
+				}]
+            });
+		}
+	}
+	
+	// Exibir o Tooltip em um determinado campo	
+	function Abrir_Tooltip_Bootstrap(SCampo, SMensagem) {
+		$(document).ready(function() {
+			$("#" + SCampo).tooltip({title: SMensagem, html: true, placement: "top"}).data('bs.tooltip').tip().addClass('tooltip-vermelho'); 
+		});
+	}
+	
+	// Mostrar o campo que está com Erro
+	function Mostrar_Campo_Erro(SCampo) {
+		objCampo = getObjetoHTML(SCampo).parentElement; 
+		SClasse = objCampo.className;
+		if (SClasse.indexOf("form-group") != -1) {
+			objCampo.className += " has-error";
+			return;
+		}
+		
+		objCampo = objCampo.parentElement;
+		SClasse = objCampo.className;
+		if (SClasse.indexOf("form-group") != -1) {
+			objCampo.className += " has-error";
+			return;	
+		}
+		
+		return;
+	}
+	
+	/*** Funções que criam eventos focus(), keyup() e blur() de componentes HTML ***/
+	function IncluirEventosPadrao() {
+		// Centralizar a Tela
+		if (getObjetoHTML("pagina") != null) {
+			window.onresize = Centralizar_Tela;
+			Centralizar_Tela();
+		}
+		
+		// Habilita o Treeview do Menu
+		if (getObjetoHTML("menu") != null) {
+			$(document).ready(function(){
+				$("#menu").treeview();
+			});
+		}
+		
+		// Aplicar estilo para campos só de leitura
+		$('span.campo').addClass('ui-widget ui-state-default ui-corner-all');
+		
+		// Funções para objetos span
+		var lstObjetos = getObjetoHTML_Tag("span");
+		for (var i = 0; i < lstObjetos.length; i++) {
+			var STipo_Campo = "texto";
+			for (var j = 0; j < lstObjetos[i].attributes.length; j++) {
+				if (lstObjetos[i].attributes[j].nodeName == "campo"){
+					STipo_Campo = lstObjetos[i].attributes[j].value;
+				}
+			}
+			
+			switch (STipo_Campo) {
+				case "campo":
+					if (Navegador_IE()) {
+						iWidth = parseInt(lstObjetos[i].style.width);
+						lstObjetos[i].style.width = iWidth + 'px';
+					} else {
+						iWidth = parseInt(lstObjetos[i].style.width) - 6;
+						lstObjetos[i].style.width = iWidth + 'px';
+					}
+					lstObjetos[i].parentNode.style.textAlign = "left";
+					break;
+			}
+		}
+		
+		// Funções para objetos label
+		var lstObjetos = getObjetoHTML_Tag("label");
+		for (var i = 0; i < lstObjetos.length; i++) {
+			lstObjetos[i].parentNode.style.textAlign = "left";
+		}
+		
+		// Funções para objetos table
+		var lstObjetos = getObjetoHTML_Tag("table");
+		for (var i = 0; i < lstObjetos.length; i++) {
+			var STipo_Campo = "texto";
+			for (var j = 0; j < lstObjetos[i].attributes.length; j++) {
+				if (lstObjetos[i].attributes[j].nodeName == "campo"){
+					STipo_Campo = lstObjetos[i].attributes[j].value;
+				}
+			}
+			
+			switch (STipo_Campo) {
+				case "tabela_formulario":
+					lstObjetos[i].className = "ui-widget ui-widget-content ui-corner-all " + lstObjetos[i].className;
+					break;
+				case "tabela_itens_cadastro":
+					if (lstObjetos[i].children[0].tagName == "THEAD") {
+						var objObjeto_THEAD = lstObjetos[i].children[0];
+						for (var j = 0; j < objObjeto_THEAD.children.length; j++) {
+							if (objObjeto_THEAD.children[j].tagName == "TR") {
+								var objObjeto_TR = objObjeto_THEAD.children[j];
+								for (var k = 0; k < objObjeto_TR.children.length; k++) {
+									if (objObjeto_TR.children[k].tagName == "TH") {
+										var objObjeto_TH = objObjeto_TR.children[k];
+										if (j > 0)
+											objObjeto_TH.className = "ui-widget-header " + objObjeto_TH.className;
+										else {
+											if (objObjeto_TR.children.length == 1)
+												objObjeto_TH.className = "ui-jqgrid-titlebar ui-widget-header ui-corner-top " + 
+														objObjeto_TH.className;
+											else {
+												switch (k) {
+													case 0:
+														objObjeto_TH.className = "ui-widget-header ui-corner-tl " + objObjeto_TH.className;
+														break;
+													case objObjeto_TR.children.length - 1:
+														objObjeto_TH.className = "ui-widget-header ui-corner-tr " + objObjeto_TH.className;
+														break;
+													default:
+														objObjeto_TH.className = "ui-widget-header " + objObjeto_TH.className;
+														break;
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+					if (lstObjetos[i].children[1].tagName == "TBODY") {
+						var objObjeto_TBODY = lstObjetos[i].children[1];
+						for (var j = 0; j < objObjeto_TBODY.children.length; j++) {
+							if (objObjeto_TBODY.children[j].tagName == "TR") {
+								var objObjeto_TR = objObjeto_TBODY.children[j];
+								for (var k = 0; k < objObjeto_TR.children.length; k++) {
+									if (objObjeto_TR.children[k].tagName == "TD") {
+										var objObjeto_TD = objObjeto_TR.children[k];
+										if (j < objObjeto_TBODY.children.length - 1)
+											objObjeto_TD.className = "ui-widget-content " + objObjeto_TD.className;
+										else {
+											if (objObjeto_TR.children.length == 1)
+												objObjeto_TD.className = "ui-widget-content ui-corner-bottom " + objObjeto_TD.className;
+											else {
+												switch (k) {
+													case 0:
+														objObjeto_TD.className = "ui-widget-content ui-corner-bl " + objObjeto_TD.className;
+														break;
+													case objObjeto_TR.children.length - 1:
+														objObjeto_TD.className = "ui-widget-content ui-corner-br " + objObjeto_TD.className;
+														break;
+													default:
+														objObjeto_TD.className = "ui-widget-content " + objObjeto_TD.className;
+														break;
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}					
+					break;
+			}
+		}
+		
+		// Funções para objetos td
+		var lstObjetos = getObjetoHTML_Tag("td");
+		for (var i = 0; i < lstObjetos.length; i++) {
+			var STipo_Campo = "texto";
+			for (var j = 0; j < lstObjetos[i].attributes.length; j++) {
+				if (lstObjetos[i].attributes[j].nodeName == "campo"){
+					STipo_Campo = lstObjetos[i].attributes[j].value;
+				}
+			}
+			
+			switch (STipo_Campo) {
+				case "linha_destaque":
+					lstObjetos[i].className = "ui-state-hover ui-corner-all " + lstObjetos[i].className;
+					break;
+				case "linha_tabs":
+					lstObjetos[i].style.paddingBottom = "2px";
+					lstObjetos[i].style.paddingLeft = "0px";
+					lstObjetos[i].style.paddingRight = "0px";
+					lstObjetos[i].style.paddingTop = "2px";
+					break;
+			}
+		}
+		
+		// Funções para objetos ul
+		var lstObjetos = getObjetoHTML_Tag("ul");
+		for (var i = 0; i < lstObjetos.length; i++) {
+			var STipo_Campo = "texto";
+			for (var j = 0; j < lstObjetos[i].attributes.length; j++) {
+				if (lstObjetos[i].attributes[j].nodeName == "campo"){
+					STipo_Campo = lstObjetos[i].attributes[j].value;
+				}
+			}
+			
+			switch (STipo_Campo) {
+				case "tabs":
+					lstObjetos[i].className = "ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all " + 
+							lstObjetos[i].className;
+					break;
+			}
+		}
+		
+		// Funções para objetos li
+		var lstObjetos = getObjetoHTML_Tag("li");
+		for (var i = 0; i < lstObjetos.length; i++) {
+			var STipo_Campo = "texto";
+			for (var j = 0; j < lstObjetos[i].attributes.length; j++) {
+				if (lstObjetos[i].attributes[j].nodeName == "campo"){
+					STipo_Campo = lstObjetos[i].attributes[j].value;
+				}
+			}
+			
+			switch (STipo_Campo) {
+				case "tab_item":
+					lstObjetos[i].className = "ui-state-default ui-corner-top " + lstObjetos[i].className;
+					break;
+				case "tab_item_selecionado":
+					lstObjetos[i].className = "ui-state-default ui-corner-top ui-tabs-selected ui-state-active " + lstObjetos[i].className
+					break;
+			}
+		}
+		
+		// Funções para objetos a
+		var lstObjetos = getObjetoHTML_Tag("a");
+		for (var i = 0; i < lstObjetos.length; i++) {
+			var STipo_Campo = "texto";
+			for (var j = 0; j < lstObjetos[i].attributes.length; j++) {
+				if (lstObjetos[i].attributes[j].nodeName == "campo"){
+					STipo_Campo = lstObjetos[i].attributes[j].value;
+				}
+			}
+			
+			switch (STipo_Campo) {
+				case "tab_item":
+					if (lstObjetos[i].addEventListener) {
+						lstObjetos[i].addEventListener('focus', Link_Foco_Evt_Tab_Item, false);
+						lstObjetos[i].addEventListener('blur', Link_Normal_Evt_Tab_Item, false);
+						lstObjetos[i].addEventListener('mouseover', Link_Foco_Evt_Tab_Item, false);
+						lstObjetos[i].addEventListener('mouseout', Link_Normal_Evt_Tab_Item, false);
+					} else if (lstObjetos[i].attachEvent) {
+						lstObjetos[i].attachEvent('onfocus', Link_Foco_Evt_Tab_Item);
+						lstObjetos[i].attachEvent('onblur', Link_Normal_Evt_Tab_Item);
+						lstObjetos[i].attachEvent('onmouseover', Link_Foco_Evt_Tab_Item);
+						lstObjetos[i].attachEvent('onmouseout', Link_Normal_Evt_Tab_Item);
+					}
+					break;
+			}
+		}
+		
+		// Funções para objetos input
+		var lstObjetos = getObjetoHTML_Tag("input");
+		for (var i = 0; i < lstObjetos.length; i++) {
+			switch (lstObjetos[i].type) {
+				case "text":
+					$('#' + lstObjetos[i].id).addClass('ui-widget ui-state-default ui-corner-all');
+					var STipo_Campo = "texto";
+					for (var j = 0; j < lstObjetos[i].attributes.length; j++) {
+						if (lstObjetos[i].attributes[j].nodeName == "campo"){
+							STipo_Campo = lstObjetos[i].attributes[j].value;
+						}
+					}
+					
+					if (STipo_Campo != "auto_completar" && STipo_Campo != "auto_completar_sem_filtro") {
+						if (lstObjetos[i].addEventListener) {
+							lstObjetos[i].addEventListener('focus', Campo_Foco_Evt, false);
+						} else if (lstObjetos[i].attachEvent) {
+							lstObjetos[i].attachEvent('onfocus', Campo_Foco_Evt);
+						}
+					}
+					
+					switch (STipo_Campo) {
+						case "texto":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt);
+							}
+							break;
+						case "texto_submit":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_Texto_Submit, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_Texto_Submit);
+							}
+							break;
+						case "texto_maiuscula":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_Texto_Maiuscula, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_Texto_Maiuscula);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt);
+							}
+							break;
+						case "texto_retirar_acentos":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_Retirar_Acentos, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_Retirar_Acentos);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt);
+							}
+							break;
+						case "auto_completar":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('focus', Campo_Foco_Evt_Auto_Completar, false);
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_Auto_Completar, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_Auto_Completar, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onfocus', Campo_Foco_Evt_Auto_Completar);
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_Auto_Completar);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_Auto_Completar);
+							}
+							break;
+						case "auto_completar_sem_filtro":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('focus', Campo_Foco_Evt_Auto_Completar_Sem_Filtro, false);
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_Auto_Completar_Sem_Filtro, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_Auto_Completar_Sem_Filtro, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onfocus', Campo_Foco_Evt_Auto_Completar_Sem_Filtro);
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_Auto_Completar_Sem_Filtro);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_Auto_Completar_Sem_Filtro);
+							}
+							break;
+						case "data":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_Data, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_Data, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_Data);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_Data);
+							}
+							break;
+						case "hora":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_Hora, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_Hora, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_Hora);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_Hora);
+							}
+							break;
+						case "numero":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_Numero, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_Numero, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_Numero);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_Numero);
+							}
+							break;
+						case "moeda":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_Moeda, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_Moeda, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_Moeda);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_Moeda);
+							}
+							break;	
+						case "ano":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_Ano, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_Ano, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_Ano);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_Ano);
+							}
+							break;
+						case "cpf":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_CPF, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_CPF, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_CPF);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_CPF);
+							}
+							break;
+						case "cnpj":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_CNPJ, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_CNPJ, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_CNPJ);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_CNPJ);
+							}
+							break;
+						case "email":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_Email, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_Email, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_Email);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_Email);
+							}
+							break;
+						case "email_com_separador":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_Email_Com_Separador, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_Email_Com_Separador, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_Email_Com_Separador);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_Email_Com_Separador);
+							}
+							break;
+						case "cep":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_CEP, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_CEP, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_CEP);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_CEP);
+							}
+							break;
+					}
+					break;
+				case "password":
+					$('#' + lstObjetos[i].id).addClass('ui-widget ui-state-default ui-corner-all');
+					var STipo_Campo = "";
+					for (var j = 0; j < lstObjetos[i].attributes.length; j++) {
+						if (lstObjetos[i].attributes[j].nodeName == "campo"){
+							STipo_Campo = lstObjetos[i].attributes[j].value;
+						}
+					}
+					switch (STipo_Campo) {
+						case "texto_submit":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('focus', Campo_Foco_Evt, false);
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_Texto_Submit, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onfocus', Campo_Foco_Evt);
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_Texto_Submit);
+							}
+							break;
+						default:
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('focus', Campo_Foco_Evt, false);
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onfocus', Campo_Foco_Evt);
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt);
+							}	
+							break;
+					}
+				case "radio":
+					var STipo_Campo = "";
+					for (var j = 0; j < lstObjetos[i].attributes.length; j++) {
+						if (lstObjetos[i].attributes[j].nodeName == "campo"){
+							STipo_Campo = lstObjetos[i].attributes[j].value;
+						}
+					}
+					switch (STipo_Campo) {
+						default:
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('focus', Radio_Foco_Evt, false);
+								lstObjetos[i].addEventListener('blur', Radio_Normal_Evt, false);
+								lstObjetos[i].addEventListener('change', Radio_Change_Evt, false);
+								lstObjetos[i].addEventListener('click', Radio_Click_Evt, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onfocus', Radio_Foco_Evt);
+								lstObjetos[i].attachEvent('onblur', Radio_Normal_Evt);
+								lstObjetos[i].attachEvent('onchange', Radio_Change_Evt);
+								lstObjetos[i].attachEvent('onclick', Radio_Click_Evt);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt);
+							}
+							break;
+					}
+				case "checkbox":
+					var STipo_Campo = "";
+					for (var j = 0; j < lstObjetos[i].attributes.length; j++) {
+						if (lstObjetos[i].attributes[j].nodeName == "campo"){
+							STipo_Campo = lstObjetos[i].attributes[j].value;
+						}
+					}
+					switch (STipo_Campo) {
+						default:
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('focus', CheckBox_Foco_Evt, false);
+								lstObjetos[i].addEventListener('blur', CheckBox_Normal_Evt, false);
+								lstObjetos[i].addEventListener('change', CheckBox_Change_Evt, false);
+								lstObjetos[i].addEventListener('click', CheckBox_Click_Evt, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onfocus', CheckBox_Foco_Evt);
+								lstObjetos[i].attachEvent('onblur', CheckBox_Normal_Evt);
+								lstObjetos[i].attachEvent('onchange', CheckBox_Change_Evt);
+								lstObjetos[i].attachEvent('onclick', CheckBox_Click_Evt);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt);
+							}
+							break;
+					}
+				default:
+					if (lstObjetos[i].addEventListener)
+						lstObjetos[i].addEventListener('keyup', Tecla_Evt, false);
+					else if (lstObjetos[i].attachEvent)
+						lstObjetos[i].attachEvent('onkeyup', Tecla_Evt);
+					break;
+			}
+		}
+		
+		// Funções para objetos select
+		var lstObjetos = getObjetoHTML_Tag("select");
+		for (var i = 0; i < lstObjetos.length; i++) {
+			$('#' + lstObjetos[i].id).addClass('ui-widget ui-state-default ui-corner-all');
+			
+			if (lstObjetos[i].addEventListener) {
+				lstObjetos[i].addEventListener('focus', Select_Foco_Evt, false);
+				lstObjetos[i].addEventListener('blur', Select_Normal_Evt, false);
+			} else if (lstObjetos[i].attachEvent) {
+				lstObjetos[i].attachEvent('onfocus', Select_Foco_Evt);
+				lstObjetos[i].attachEvent('onblur', Select_Normal_Evt);
+			}
+				
+			var STipo_Campo = "select";
+			for (var j = 0; j < lstObjetos[i].attributes.length; j++) {
+				if (lstObjetos[i].attributes[j].nodeName == "campo"){
+					STipo_Campo = lstObjetos[i].attributes[j].value;
+				}
+			}
+			
+			switch (STipo_Campo) {
+				case "select":
+					if (lstObjetos[i].addEventListener) {
+						lstObjetos[i].addEventListener('keyup', Tecla_Evt_Select, false);
+						lstObjetos[i].addEventListener('change', Select_Change, false);
+						lstObjetos[i].addEventListener('click', Select_Click, false);
+					} else if (lstObjetos[i].attachEvent) {
+						lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_Select);
+						lstObjetos[i].attachEvent('onchange', Select_Change);
+						lstObjetos[i].attachEvent('onclick', Select_Click);
+					}
+					break;
+			}
+		}
+		
+		// Funções para objetos textarea
+		var lstObjetos = getObjetoHTML_Tag("textarea");
+		for (var i = 0; i < lstObjetos.length; i++) {
+			$('#' + lstObjetos[i].id).addClass('ui-widget ui-state-default ui-corner-all');
+			
+			var STipo_Campo = "textarea";
+			for (var j = 0; j < lstObjetos[i].attributes.length; j++) {
+				if (lstObjetos[i].attributes[j].nodeName == "campo"){
+					STipo_Campo = lstObjetos[i].attributes[j].value;
+				}
+			}
+			switch (STipo_Campo) {
+				case "textarea":
+					if (lstObjetos[i].addEventListener) {
+						lstObjetos[i].addEventListener('focus', TextArea_Foco_Evt, false);
+						lstObjetos[i].addEventListener('blur', TextArea_Normal_Evt, false);
+					} else if (lstObjetos[i].attachEvent) {
+						lstObjetos[i].attachEvent('onfocus', TextArea_Foco_Evt);
+						lstObjetos[i].attachEvent('onblur', TextArea_Normal_Evt);
+					}
+					break;
+				case "textarea_tab":
+					if (lstObjetos[i].addEventListener) {
+						lstObjetos[i].addEventListener('focus', TextArea_Foco_Evt, false);
+						lstObjetos[i].addEventListener('blur', TextArea_Normal_Evt, false);
+						lstObjetos[i].addEventListener('keyup', Tecla_Evt_TextArea_Tab, false);
+					} else if (lstObjetos[i].attachEvent) {
+						lstObjetos[i].attachEvent('onfocus', TextArea_Foco_Evt);
+						lstObjetos[i].attachEvent('onblur', TextArea_Normal_Evt);
+						lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_TextArea_Tab);
+					}
+					break;
+				case "tinymce":
+					if (lstObjetos[i].addEventListener) {
+						lstObjetos[i].addEventListener('focus', TextArea_Foco_Evt, false);
+						lstObjetos[i].addEventListener('blur', TextArea_Normal_Evt, false);
+					} else if (lstObjetos[i].attachEvent) {
+						lstObjetos[i].attachEvent('onfocus', TextArea_Foco_Evt);
+						lstObjetos[i].attachEvent('onblur', TextArea_Normal_Evt);
+					}
+					break;
+			}
+		}
+		
+		// Funções para objetos button
+		var lstObjetos = getObjetoHTML_Tag("button");
+		for (var i = 0; i < lstObjetos.length; i++) {
+			var STipo_Campo = "";
+			for (var j = 0; j < lstObjetos[i].attributes.length; j++) {
+				if (lstObjetos[i].attributes[j].nodeName == "campo"){
+					STipo_Campo = lstObjetos[i].attributes[j].value;
+				}
+			}
+			switch (STipo_Campo) {
+				case "botao_login":
+					$('#' + lstObjetos[i].id).addClass('botao_login ui-widget ui-state-default ui-corner-all');
+					$('#' + lstObjetos[i].id).button({icons:{primary:'ui-icon-key'}});
+					if (Navegador_IE())
+						lstObjetos[i].parentNode.className = "botao_login " + lstObjetos[i].parentNode.className;
+					break;
+				case "botao_gravar":
+					$('#' + lstObjetos[i].id).addClass('botao_gravar ui-widget ui-state-default ui-corner-all');
+					$('#' + lstObjetos[i].id).button({icons:{primary:'ui-icon-check'}});
+					if (Navegador_IE())
+						lstObjetos[i].parentNode.className = "botao_gravar " + lstObjetos[i].parentNode.className;
+					break;
+				case "botao_pesquisar":
+					$('#' + lstObjetos[i].id).addClass('botao_pesquisar ui-widget ui-state-default ui-corner-all');
+					$('#' + lstObjetos[i].id).button({icons:{primary:'ui-icon-search'}});
+					if (Navegador_IE())
+						lstObjetos[i].parentNode.className = "botao_pesquisar " + lstObjetos[i].parentNode.className;
+					break;
+				case "botao_novo":
+					$('#' + lstObjetos[i].id).addClass('botao_novo ui-widget ui-state-default ui-corner-all');
+					$('#' + lstObjetos[i].id).button({icons:{primary:'ui-icon-plus'}});
+					if (Navegador_IE())
+						lstObjetos[i].parentNode.className = "botao_novo " + lstObjetos[i].parentNode.className;
+					break;
+				case "botao_excluir":
+					$('#' + lstObjetos[i].id).addClass('botao_excluir ui-widget ui-state-default ui-corner-all');
+					$('#' + lstObjetos[i].id).button({icons:{primary:'ui-icon-close'}});
+					if (Navegador_IE())
+						lstObjetos[i].parentNode.className = "botao_excluir " + lstObjetos[i].parentNode.className;
+					break;
+				case "botao_imprimir":
+					$('#' + lstObjetos[i].id).addClass('botao_imprimir ui-widget ui-state-default ui-corner-all');
+					$('#' + lstObjetos[i].id).button({icons:{primary:'ui-icon-print'}});
+					if (Navegador_IE())
+						lstObjetos[i].parentNode.className = "botao_imprimir " + lstObjetos[i].parentNode.className;
+					break;
+				case "botao_voltar":
+					$('#' + lstObjetos[i].id).addClass('botao_voltar ui-widget ui-state-default ui-corner-all');
+					$('#' + lstObjetos[i].id).button({icons:{primary:'ui-icon-arrowreturnthick-1-w'}});
+					if (Navegador_IE())
+						lstObjetos[i].parentNode.className = "botao_voltar " + lstObjetos[i].parentNode.className;
+					break;
+				case "botao_fechar":
+					$('#' + lstObjetos[i].id).addClass('botao_fechar ui-widget ui-state-default ui-corner-all');
+					$('#' + lstObjetos[i].id).button({icons:{primary:'ui-icon-circle-close'}});
+					if (Navegador_IE())
+						lstObjetos[i].parentNode.className = "botao_fechar " + lstObjetos[i].parentNode.className;
+					break;
+				case "botao_email":
+					$('#' + lstObjetos[i].id).addClass('botao_email ui-widget ui-state-default ui-corner-all');
+					$('#' + lstObjetos[i].id).button({icons:{primary:'ui-icon-mail-closed'}});
+					if (Navegador_IE())
+						lstObjetos[i].parentNode.className = "botao_email " + lstObjetos[i].parentNode.className;
+					break;
+				default:
+					$('#' + lstObjetos[i].id).addClass('ui-widget ui-state-default ui-corner-all');
+					break;
+			}
+			if (lstObjetos[i].addEventListener) {
+				lstObjetos[i].addEventListener('focus', Botao_Foco_Evt, false);
+				lstObjetos[i].addEventListener('blur', Botao_Normal_Evt, false);
+			} else if (lstObjetos[i].attachEvent) {
+				lstObjetos[i].attachEvent('onfocus', Botao_Foco_Evt);
+				lstObjetos[i].attachEvent('onblur', Botao_Normal_Evt);
+			}
+		}
+	}
+	
+	/*** Funções que criam eventos focus(), keyup() e blur() de componentes HTML para Bootstrap ***/
+	function IncluirEventosPadrao_Bootstrap() {
+		// Funções para objetos a
+		var lstObjetos = getObjetoHTML_Tag("a");
+		for (var i = 0; i < lstObjetos.length; i++) {
+			var STipo_Campo = "texto";
+			for (var j = 0; j < lstObjetos[i].attributes.length; j++) {
+				if (lstObjetos[i].attributes[j].nodeName == "campo"){
+					STipo_Campo = lstObjetos[i].attributes[j].value;
+				}
+			}
+			
+			switch (STipo_Campo) {
+				case "tab_item":
+					if (lstObjetos[i].addEventListener) {
+						lstObjetos[i].addEventListener('focus', Link_Foco_Evt_Tab_Item, false);
+						lstObjetos[i].addEventListener('blur', Link_Normal_Evt_Tab_Item, false);
+						lstObjetos[i].addEventListener('mouseover', Link_Foco_Evt_Tab_Item, false);
+						lstObjetos[i].addEventListener('mouseout', Link_Normal_Evt_Tab_Item, false);
+					} else if (lstObjetos[i].attachEvent) {
+						lstObjetos[i].attachEvent('onfocus', Link_Foco_Evt_Tab_Item);
+						lstObjetos[i].attachEvent('onblur', Link_Normal_Evt_Tab_Item);
+						lstObjetos[i].attachEvent('onmouseover', Link_Foco_Evt_Tab_Item);
+						lstObjetos[i].attachEvent('onmouseout', Link_Normal_Evt_Tab_Item);
+					}
+					break;
+			}
+		}
+		
+		// Funções para objetos input
+		var lstObjetos = getObjetoHTML_Tag("input");
+		for (var i = 0; i < lstObjetos.length; i++) {
+			switch (lstObjetos[i].type) {
+				case "text":
+					var STipo_Campo = "texto";
+					for (var j = 0; j < lstObjetos[i].attributes.length; j++) {
+						if (lstObjetos[i].attributes[j].nodeName == "campo"){
+							STipo_Campo = lstObjetos[i].attributes[j].value;
+						}
+					}
+					
+					if (STipo_Campo != "auto_completar" && STipo_Campo != "auto_completar_sem_filtro") {
+						if (lstObjetos[i].addEventListener) {
+							lstObjetos[i].addEventListener('focus', Campo_Foco_Evt, false);
+						} else if (lstObjetos[i].attachEvent) {
+							lstObjetos[i].attachEvent('onfocus', Campo_Foco_Evt);
+						}
+					}
+					
+					switch (STipo_Campo) {
+						case "texto":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt);
+							}
+							break;
+						case "texto_submit":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_Texto_Submit, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_Texto_Submit);
+							}
+							break;
+						case "texto_maiuscula":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_Texto_Maiuscula, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_Texto_Maiuscula);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt);
+							}
+							break;
+						case "texto_retirar_acentos":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_Retirar_Acentos, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_Retirar_Acentos);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt);
+							}
+							break;
+						case "auto_completar":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('focus', Campo_Foco_Evt_Auto_Completar, false);
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_Auto_Completar, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_Auto_Completar, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onfocus', Campo_Foco_Evt_Auto_Completar);
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_Auto_Completar);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_Auto_Completar);
+							}
+							break;
+						case "auto_completar_sem_filtro":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('focus', Campo_Foco_Evt_Auto_Completar_Sem_Filtro, false);
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_Auto_Completar_Sem_Filtro, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_Auto_Completar_Sem_Filtro, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onfocus', Campo_Foco_Evt_Auto_Completar_Sem_Filtro);
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_Auto_Completar_Sem_Filtro);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_Auto_Completar_Sem_Filtro);
+							}
+							break;
+						case "data":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_Data, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_Data, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_Data);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_Data);
+							}
+							break;
+						case "hora":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_Hora, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_Hora, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_Hora);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_Hora);
+							}
+							break;
+						case "numero":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_Numero, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_Numero, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_Numero);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_Numero);
+							}
+							break;
+						case "moeda":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_Moeda, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_Moeda, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_Moeda);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_Moeda);
+							}
+							break;	
+						case "ano":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_Ano, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_Ano, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_Ano);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_Ano);
+							}
+							break;
+						case "cpf":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_CPF, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_CPF, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_CPF);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_CPF);
+							}
+							break;
+						case "cnpj":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_CNPJ, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_CNPJ, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_CNPJ);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_CNPJ);
+							}
+							break;
+						case "email":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_Email, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_Email, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_Email);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_Email);
+							}
+							break;
+						case "email_com_separador":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_Email_Com_Separador, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_Email_Com_Separador, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_Email_Com_Separador);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_Email_Com_Separador);
+							}
+							break;
+						case "cep":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt_CEP, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_CEP, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt_CEP);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_CEP);
+							}
+							break;
+					}
+					break;
+				case "password":
+					var STipo_Campo = "";
+					for (var j = 0; j < lstObjetos[i].attributes.length; j++) {
+						if (lstObjetos[i].attributes[j].nodeName == "campo"){
+							STipo_Campo = lstObjetos[i].attributes[j].value;
+						}
+					}
+					switch (STipo_Campo) {
+						case "texto_submit":
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('focus', Campo_Foco_Evt, false);
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt_Texto_Submit, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onfocus', Campo_Foco_Evt);
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_Texto_Submit);
+							}
+							break;
+						default:
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('focus', Campo_Foco_Evt, false);
+								lstObjetos[i].addEventListener('blur', Campo_Normal_Evt, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onfocus', Campo_Foco_Evt);
+								lstObjetos[i].attachEvent('onblur', Campo_Normal_Evt);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt);
+							}	
+							break;
+					}
+				case "radio":
+					var STipo_Campo = "";
+					for (var j = 0; j < lstObjetos[i].attributes.length; j++) {
+						if (lstObjetos[i].attributes[j].nodeName == "campo"){
+							STipo_Campo = lstObjetos[i].attributes[j].value;
+						}
+					}
+					switch (STipo_Campo) {
+						default:
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('focus', Radio_Foco_Evt, false);
+								lstObjetos[i].addEventListener('blur', Radio_Normal_Evt, false);
+								lstObjetos[i].addEventListener('change', Radio_Change_Evt, false);
+								lstObjetos[i].addEventListener('click', Radio_Click_Evt, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onfocus', Radio_Foco_Evt);
+								lstObjetos[i].attachEvent('onblur', Radio_Normal_Evt);
+								lstObjetos[i].attachEvent('onchange', Radio_Change_Evt);
+								lstObjetos[i].attachEvent('onclick', Radio_Click_Evt);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt);
+							}
+							break;
+					}
+				case "checkbox":
+					var STipo_Campo = "";
+					for (var j = 0; j < lstObjetos[i].attributes.length; j++) {
+						if (lstObjetos[i].attributes[j].nodeName == "campo"){
+							STipo_Campo = lstObjetos[i].attributes[j].value;
+						}
+					}
+					switch (STipo_Campo) {
+						default:
+							if (lstObjetos[i].addEventListener) {
+								lstObjetos[i].addEventListener('focus', CheckBox_Foco_Evt, false);
+								lstObjetos[i].addEventListener('blur', CheckBox_Normal_Evt, false);
+								lstObjetos[i].addEventListener('change', CheckBox_Change_Evt, false);
+								lstObjetos[i].addEventListener('click', CheckBox_Click_Evt, false);
+								lstObjetos[i].addEventListener('keyup', Tecla_Evt, false);
+							} else if (lstObjetos[i].attachEvent) {
+								lstObjetos[i].attachEvent('onfocus', CheckBox_Foco_Evt);
+								lstObjetos[i].attachEvent('onblur', CheckBox_Normal_Evt);
+								lstObjetos[i].attachEvent('onchange', CheckBox_Change_Evt);
+								lstObjetos[i].attachEvent('onclick', CheckBox_Click_Evt);
+								lstObjetos[i].attachEvent('onkeyup', Tecla_Evt);
+							}
+							break;
+					}
+				default:
+					if (lstObjetos[i].addEventListener)
+						lstObjetos[i].addEventListener('keyup', Tecla_Evt, false);
+					else if (lstObjetos[i].attachEvent)
+						lstObjetos[i].attachEvent('onkeyup', Tecla_Evt);
+					break;
+			}
+		}
+		
+		// Funções para objetos select
+		var lstObjetos = getObjetoHTML_Tag("select");
+		for (var i = 0; i < lstObjetos.length; i++) {
+			if (lstObjetos[i].addEventListener) {
+				lstObjetos[i].addEventListener('focus', Select_Foco_Evt, false);
+				lstObjetos[i].addEventListener('blur', Select_Normal_Evt, false);
+			} else if (lstObjetos[i].attachEvent) {
+				lstObjetos[i].attachEvent('onfocus', Select_Foco_Evt);
+				lstObjetos[i].attachEvent('onblur', Select_Normal_Evt);
+			}
+				
+			var STipo_Campo = "select";
+			for (var j = 0; j < lstObjetos[i].attributes.length; j++) {
+				if (lstObjetos[i].attributes[j].nodeName == "campo"){
+					STipo_Campo = lstObjetos[i].attributes[j].value;
+				}
+			}
+			
+			switch (STipo_Campo) {
+				case "select":
+					if (lstObjetos[i].addEventListener) {
+						lstObjetos[i].addEventListener('keyup', Tecla_Evt_Select, false);
+						lstObjetos[i].addEventListener('change', Select_Change, false);
+						lstObjetos[i].addEventListener('click', Select_Click, false);
+					} else if (lstObjetos[i].attachEvent) {
+						lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_Select);
+						lstObjetos[i].attachEvent('onchange', Select_Change);
+						lstObjetos[i].attachEvent('onclick', Select_Click);
+					}
+					break;
+			}
+		}
+		
+		// Funções para objetos textarea
+		var lstObjetos = getObjetoHTML_Tag("textarea");
+		for (var i = 0; i < lstObjetos.length; i++) {
+			var STipo_Campo = "textarea";
+			for (var j = 0; j < lstObjetos[i].attributes.length; j++) {
+				if (lstObjetos[i].attributes[j].nodeName == "campo"){
+					STipo_Campo = lstObjetos[i].attributes[j].value;
+				}
+			}
+			switch (STipo_Campo) {
+				case "textarea":
+					if (lstObjetos[i].addEventListener) {
+						lstObjetos[i].addEventListener('focus', TextArea_Foco_Evt, false);
+						lstObjetos[i].addEventListener('blur', TextArea_Normal_Evt, false);
+					} else if (lstObjetos[i].attachEvent) {
+						lstObjetos[i].attachEvent('onfocus', TextArea_Foco_Evt);
+						lstObjetos[i].attachEvent('onblur', TextArea_Normal_Evt);
+					}
+					break;
+				case "textarea_tab":
+					if (lstObjetos[i].addEventListener) {
+						lstObjetos[i].addEventListener('focus', TextArea_Foco_Evt, false);
+						lstObjetos[i].addEventListener('blur', TextArea_Normal_Evt, false);
+						lstObjetos[i].addEventListener('keyup', Tecla_Evt_TextArea_Tab, false);
+					} else if (lstObjetos[i].attachEvent) {
+						lstObjetos[i].attachEvent('onfocus', TextArea_Foco_Evt);
+						lstObjetos[i].attachEvent('onblur', TextArea_Normal_Evt);
+						lstObjetos[i].attachEvent('onkeyup', Tecla_Evt_TextArea_Tab);
+					}
+					break;
+				case "tinymce":
+					if (lstObjetos[i].addEventListener) {
+						lstObjetos[i].addEventListener('focus', TextArea_Foco_Evt, false);
+						lstObjetos[i].addEventListener('blur', TextArea_Normal_Evt, false);
+					} else if (lstObjetos[i].attachEvent) {
+						lstObjetos[i].attachEvent('onfocus', TextArea_Foco_Evt);
+						lstObjetos[i].attachEvent('onblur', TextArea_Normal_Evt);
+					}
+					break;
+			}
+		}
+		
+		// Funções para objetos button
+		var lstObjetos = getObjetoHTML_Tag("button");
+		for (var i = 0; i < lstObjetos.length; i++) {
+			var STipo_Campo = "";
+			for (var j = 0; j < lstObjetos[i].attributes.length; j++) {
+				if (lstObjetos[i].attributes[j].nodeName == "campo"){
+					STipo_Campo = lstObjetos[i].attributes[j].value;
+				}
+			}
+			switch (STipo_Campo) {
+				case "botao":
+					$('#' + lstObjetos[i].id).addClass('btn btn-primary');
+					//lstObjetos[i].innerHTML = "<span class='glyphicon glyphicon-undo' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					/*
+					$('#' + lstObjetos[i].id).addClass('botao_voltar ui-widget ui-state-default ui-corner-all');
+					$('#' + lstObjetos[i].id).button({icons:{primary:'ui-icon-arrowreturnthick-1-w'}});
+					if (Navegador_IE())
+						lstObjetos[i].parentNode.className = "botao_voltar " + lstObjetos[i].parentNode.className;
+					*/
+					break;
+				case "botao_login":
+					$('#' + lstObjetos[i].id).addClass('btn btn-warning');
+					lstObjetos[i].innerHTML = "<span class='fa fa-key' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					//lstObjetos[i].innerHTML = "<span class='oi oi-key' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					//lstObjetos[i].innerHTML = "<span class='glyphicon glyphicon-log-in' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					/*
+					$('#' + lstObjetos[i].id).addClass('botao_login ui-widget ui-state-default ui-corner-all');
+					$('#' + lstObjetos[i].id).button({icons:{primary:'ui-icon-key'}});
+					if (Navegador_IE())
+						lstObjetos[i].parentNode.className = "botao_login " + lstObjetos[i].parentNode.className;
+					*/
+					break;
+				case "botao_gravar":
+					$('#' + lstObjetos[i].id).addClass('btn btn-success');
+					lstObjetos[i].innerHTML = "<span class='fa fa-save' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					//lstObjetos[i].innerHTML = "<span class='glyphicon glyphicon-floppy-saved' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					//$('#' + lstObjetos[i].id).addClass('botao_gravar ui-widget ui-state-default ui-corner-all');
+					//$('#' + lstObjetos[i].id).button({icons:{primary:'ui-icon-check'}});
+					//if (Navegador_IE())
+					//	lstObjetos[i].parentNode.className = "botao_gravar " + lstObjetos[i].parentNode.className;
+					break;
+				case "botao_pesquisar":
+					$('#' + lstObjetos[i].id).addClass('btn btn-primary');
+					lstObjetos[i].innerHTML = "<span class='fa fa-search' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					//lstObjetos[i].innerHTML = "<span class='glyphicon glyphicon-search' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					//$('#' + lstObjetos[i].id).addClass('botao_pesquisar ui-widget ui-state-default ui-corner-all');
+					//$('#' + lstObjetos[i].id).button({icons:{primary:'ui-icon-search'}});
+					//if (Navegador_IE())
+					//	lstObjetos[i].parentNode.className = "botao_pesquisar " + lstObjetos[i].parentNode.className;
+					break;
+				case "botao_novo":
+					$('#' + lstObjetos[i].id).addClass('btn btn-info');
+					lstObjetos[i].innerHTML = "<span class='fa fa-plus' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					//lstObjetos[i].innerHTML = "<span class='glyphicon glyphicon-plus' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					/*
+					$('#' + lstObjetos[i].id).addClass('botao_novo ui-widget ui-state-default ui-corner-all');
+					$('#' + lstObjetos[i].id).button({icons:{primary:'ui-icon-plus'}});
+					if (Navegador_IE())
+						lstObjetos[i].parentNode.className = "botao_novo " + lstObjetos[i].parentNode.className;
+					*/
+					break;
+				case "botao_excluir":
+					$('#' + lstObjetos[i].id).addClass('btn btn-danger');
+					lstObjetos[i].innerHTML = "<span class='far fa-trash-alt' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					//lstObjetos[i].innerHTML = "<span class='glyphicon glyphicon-remove' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					/*
+					$('#' + lstObjetos[i].id).addClass('botao_excluir ui-widget ui-state-default ui-corner-all');
+					$('#' + lstObjetos[i].id).button({icons:{primary:'ui-icon-close'}});
+					if (Navegador_IE())
+						lstObjetos[i].parentNode.className = "botao_excluir " + lstObjetos[i].parentNode.className;
+					*/
+					break;
+				case "botao_imprimir":
+					$('#' + lstObjetos[i].id).addClass('btn btn-primary');
+					lstObjetos[i].innerHTML = "<span class='fa fa-print' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					//lstObjetos[i].innerHTML = "<span class='glyphicon glyphicon-print' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					/*
+					$('#' + lstObjetos[i].id).addClass('botao_imprimir ui-widget ui-state-default ui-corner-all');
+					$('#' + lstObjetos[i].id).button({icons:{primary:'ui-icon-print'}});
+					if (Navegador_IE())
+						lstObjetos[i].parentNode.className = "botao_imprimir " + lstObjetos[i].parentNode.className;
+					*/
+					break;
+				case "botao_voltar":
+					$('#' + lstObjetos[i].id).addClass('btn btn-primary');
+					lstObjetos[i].innerHTML = "<span class='fa fa-undo' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					//lstObjetos[i].innerHTML = "<span class='glyphicon glyphicon-undo' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					/*
+					$('#' + lstObjetos[i].id).addClass('botao_voltar ui-widget ui-state-default ui-corner-all');
+					$('#' + lstObjetos[i].id).button({icons:{primary:'ui-icon-arrowreturnthick-1-w'}});
+					if (Navegador_IE())
+						lstObjetos[i].parentNode.className = "botao_voltar " + lstObjetos[i].parentNode.className;
+					*/
+					break;
+				case "botao_fechar":
+					$('#' + lstObjetos[i].id).addClass('btn btn-primary');
+					lstObjetos[i].innerHTML = "<span class='fa fa-window-close' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					//lstObjetos[i].innerHTML = "<span class='glyphicon glyphicon-remove-circle' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					/*
+					$('#' + lstObjetos[i].id).addClass('botao_fechar ui-widget ui-state-default ui-corner-all');
+					$('#' + lstObjetos[i].id).button({icons:{primary:'ui-icon-circle-close'}});
+					if (Navegador_IE())
+						lstObjetos[i].parentNode.className = "botao_fechar " + lstObjetos[i].parentNode.className;
+					*/
+					break;
+				case "botao_email":
+					$('#' + lstObjetos[i].id).addClass('btn btn-primary');
+					lstObjetos[i].innerHTML = "<span class='fa fa-envelope' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					//lstObjetos[i].innerHTML = "<span class='glyphicon glyphicon-envelope' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					/*
+					$('#' + lstObjetos[i].id).addClass('botao_email ui-widget ui-state-default ui-corner-all');
+					$('#' + lstObjetos[i].id).button({icons:{primary:'ui-icon-mail-closed'}});
+					if (Navegador_IE())
+						lstObjetos[i].parentNode.className = "botao_email " + lstObjetos[i].parentNode.className;
+					*/
+					break;
+				case "botao_calendario":
+					$('#' + lstObjetos[i].id).addClass('btn btn-primary');
+					lstObjetos[i].innerHTML = "<span class='far fa-calendar-alt' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					//lstObjetos[i].innerHTML = "<span class='glyphicon glyphicon-envelope' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					/*
+					$('#' + lstObjetos[i].id).addClass('botao_email ui-widget ui-state-default ui-corner-all');
+					$('#' + lstObjetos[i].id).button({icons:{primary:'ui-icon-mail-closed'}});
+					if (Navegador_IE())
+						lstObjetos[i].parentNode.className = "botao_email " + lstObjetos[i].parentNode.className;
+					*/
+					break;
+				case "botao_aceitar":
+					$('#' + lstObjetos[i].id).addClass('btn btn-success');
+					lstObjetos[i].innerHTML = "<span class='fa fa-check-circle' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					//lstObjetos[i].innerHTML = "<span class='glyphicon glyphicon-floppy-saved' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					//$('#' + lstObjetos[i].id).addClass('botao_gravar ui-widget ui-state-default ui-corner-all');
+					//$('#' + lstObjetos[i].id).button({icons:{primary:'ui-icon-check'}});
+					//if (Navegador_IE())
+					//	lstObjetos[i].parentNode.className = "botao_gravar " + lstObjetos[i].parentNode.className;
+					break;
+				case "botao_recusar":
+					$('#' + lstObjetos[i].id).addClass('btn btn-danger');
+					//lstObjetos[i].innerHTML = "<span class='far fa-times-circle' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					lstObjetos[i].innerHTML = "<span class='fa fa-ban' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					//lstObjetos[i].innerHTML = "<span class='glyphicon glyphicon-remove' style='padding-right: 5px'></span> " + lstObjetos[i].innerHTML;
+					/*
+					$('#' + lstObjetos[i].id).addClass('botao_excluir ui-widget ui-state-default ui-corner-all');
+					$('#' + lstObjetos[i].id).button({icons:{primary:'ui-icon-close'}});
+					if (Navegador_IE())
+						lstObjetos[i].parentNode.className = "botao_excluir " + lstObjetos[i].parentNode.className;
+					*/
+					break;
+				default:
+					//$('#' + lstObjetos[i].id).addClass('ui-widget ui-state-default ui-corner-all');
+					break;
+			}
+			if (lstObjetos[i].addEventListener) {
+				lstObjetos[i].addEventListener('focus', Botao_Foco_Evt, false);
+				lstObjetos[i].addEventListener('blur', Botao_Normal_Evt, false);
+			} else if (lstObjetos[i].attachEvent) {
+				lstObjetos[i].attachEvent('onfocus', Botao_Foco_Evt);
+				lstObjetos[i].attachEvent('onblur', Botao_Normal_Evt);
+			}
+		}
+	}
+	
+	
+	/*** Funções que validar as funções change() dos componentes HTML ***/
+	// Função que controla o evento change do campo select com funcao
+	function Select_Change(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		if (objCampo.getAttribute("funcao") != undefined)
+			Funcao(objCampo.name, "change", objCampo.value);
+	}
+	
+	// Emula a função de change no radio normal
+	function Radio_Change_Evt(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		objCampo.select();
+		if (objCampo.getAttribute("funcao") != undefined)
+			Funcao(objCampo.name, "change", objCampo.value);
+	}
+	
+	// Emula a função de change no checkbox normal
+	function CheckBox_Change_Evt(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		objCampo.select();
+		if (objCampo.getAttribute("funcao") != undefined)
+			Funcao(objCampo.name, "change", objCampo.value);
+	}
+	
+	
+	/*** Funções que validar as funções click() dos componentes HTML ***/
+	// Função que controla o evento click do campo select com funcao
+	function Select_Click(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		if (objCampo.getAttribute("funcao") != undefined)
+			Funcao(objCampo.name, "click", objCampo.value);
+	}
+	
+	// Emula a função de click no radio normal
+	function Radio_Click_Evt(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		objCampo.select();
+		if (objCampo.getAttribute("funcao") != undefined)
+			Funcao(objCampo.name, "click", objCampo.value);
+	}
+	
+	// Emula a função de click no checkbox normal
+	function CheckBox_Click_Evt(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		objCampo.select();
+		if (objCampo.getAttribute("funcao") != undefined)
+			Funcao(objCampo.name, "click", objCampo.value);
+	}
+	
+	
+	/*** Funções que validar as funções keyup() dos componentes HTML ***/
+	// Função que emula o Tab a partir do Enter
+	function Tecla_Evt(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Tecla(Evento, objCampo, "");
+	}
+	
+	// Função que emula o Tab a partir do Enter para campo de texto com funcao
+	function Tecla_Evt_Select(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Tecla(Evento, objCampo, "select");
+	}
+	
+	// Função que emula o Tab a partir do Enter para campo de texto com submit
+	function Tecla_Evt_Texto_Submit(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Tecla(Evento, objCampo, "texto_submit");
+	}
+	
+	// Função que emula o Tab a partir do Enter para campo de auto completar
+	function Tecla_Evt_Auto_Completar(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Tecla(Evento, objCampo, "auto_completar");
+	}
+	
+	// Função que emula o Tab a partir do Enter para campo de auto completar sem filtro
+	function Tecla_Evt_Auto_Completar_Sem_Filtro(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Tecla(Evento, objCampo, "auto_completar_sem_filtro");
+	}
+	
+	// Função que emula o Tab a partir do Enter para campo de data
+	function Tecla_Evt_Data(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Tecla(Evento, objCampo, "data");
+	}
+	
+	// Função que emula o Tab a partir do Enter para campo de hora
+	function Tecla_Evt_Hora(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Tecla(Evento, objCampo, "hora");
+	}
+	
+	// Função que emula o Tab a partir do Enter para campo de número
+	function Tecla_Evt_Numero(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Tecla(Evento, objCampo, "numero");
+	}
+	
+	// Função que emula o Tab a partir do Enter para campo de número
+	function Tecla_Evt_Moeda(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Tecla(Evento, objCampo, "moeda");
+	}
+	
+	// Função que emula o Tab a partir do Enter para campo de ano
+	function Tecla_Evt_Ano(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Tecla(Evento, objCampo, "ano");
+	}
+	
+	// Função que emula o Tab a partir do Enter para campo de CPF
+	function Tecla_Evt_CPF(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Tecla(Evento, objCampo, "cpf");
+	}
+	
+	// Função que emula o Tab a partir do Enter para campo de CNPJ
+	function Tecla_Evt_CNPJ(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Tecla(Evento, objCampo, "cnpj");
+	}
+	
+	// Função que emula o Tab a partir do Enter para campo de E-mail
+	function Tecla_Evt_Email(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Tecla(Evento, objCampo, "email");
+	}
+	
+	// Função que emula o Tab a partir do Enter para campo de E-mail Com Separador
+	function Tecla_Evt_Email_Com_Separador(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Tecla(Evento, objCampo, "email_com_separador");
+	}
+	
+	// Função que emula o Tab a partir do Enter para campo de CEP
+	function Tecla_Evt_CEP(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Tecla(Evento, objCampo, "cep");
+	}
+	
+	// Função que emula o Tab a partir do Enter para textarea
+	function Tecla_Evt_TextArea(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		TextArea_MaxLength(objCampo);
+	}
+	
+	// Função que emula o Tab a partir do Enter para textarea
+	function Tecla_Evt_TextArea_Tab(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		TextArea_MaxLength(objCampo);
+		if (Tecla_Enter(Evento) == true) {
+			var objProximo_Campo = getObjetoHTML_TabIndex(parseInt(objCampo.tabIndex) + 1, objCampo);
+			objProximo_Campo.focus();
+		}
+	}
+	
+	// Função que imita o maxlength para o elemento textarea
+	function TextArea_MaxLength(objCampo) {
+		var iMaxLength = objCampo.getAttribute ? parseInt(objCampo.getAttribute("maxlength")) : 0;
+        if (objCampo.value.indexOf("\n\r") !== -1)
+            objCampo.value = objCampo.value.replace("\n\r","");
+        if (objCampo.value.indexOf("\n") !== -1)
+            objCampo.value = objCampo.value.replace("\n","");
+		if (objCampo.getAttribute && iMaxLength > 0 && String_Trim(objCampo.value).length > iMaxLength)
+			objCampo.value = String_Trim(objCampo.value).substring(0, iMaxLength);
+	}
+	
+	// Faz a função do trim
+	function String_Trim(STexto) {
+		return STexto.replace(/^\s*/, "").replace(/\s*$/, "");
+	}
+
+	// Função que emula o Tab a partir do Enter
+	function Tecla(Evento, objCampo, STipo_Campo) {
+		var charCode = getCharCode(Evento);
+		Validar_Valor_Campo(objCampo, STipo_Campo);
+		if (Tecla_Enter(Evento) == true) {
+			if (iQtde_Invalidar_Enter > 0)
+				iQtde_Invalidar_Enter--;
+			else {
+				if (Validar_Campo(objCampo, STipo_Campo)) {
+					var objProximo_Campo = getObjetoHTML_TabIndex(parseInt(objCampo.tabIndex) + 1, objCampo);
+					var STipo_Proximo_Campo = "";
+					for (var j = 0; j < objProximo_Campo.attributes.length; j++) {
+						if (objProximo_Campo.attributes[j].nodeName == "campo"){
+							STipo_Proximo_Campo = objProximo_Campo.attributes[j].value;
+						}
+					}
+					if (STipo_Campo == "auto_completar" || STipo_Campo == "auto_completar_sem_filtro")
+						Ocultar_Lista(objCampo);
+					if (objCampo.getAttribute("funcao") != undefined)
+						Funcao(objCampo.name, "enter", objCampo.value);
+					if (STipo_Proximo_Campo == "tinymce")
+						tinyMCE.getInstanceById(objProximo_Campo.name).focus();
+					else
+						objProximo_Campo.focus();
+				} else {
+					objCampo.focus();
+					Campo_Foco(objCampo);
+				}
+			}
+		} else {
+			if (STipo_Campo == "auto_completar" || STipo_Campo == "auto_completar_sem_filtro") {
+				if (Tecla_Up(Evento) == true || Tecla_Down(Evento) == true) {
+					objSELECT_Lista = getObjetoHTML(objCampo.name + "_lista");
+					if (Tecla_Up(Evento) == true) {
+						if (parseInt(objSELECT_Lista.selectedIndex) > 0)
+							objSELECT_Lista.selectedIndex = parseInt(objSELECT_Lista.selectedIndex ) - 1;
+						else
+							objSELECT_Lista.selectedIndex = 0;
+					} else {;
+						if (parseInt(objSELECT_Lista.selectedIndex) < parseInt(objSELECT_Lista.options.length) - 1)
+							objSELECT_Lista.selectedIndex = parseInt(objSELECT_Lista.selectedIndex) + 1;
+						else
+							objSELECT_Lista.selectedIndex = parseInt(objSELECT_Lista.options.length) - 1;
+					}
+				} else {
+					if (STipo_Campo == "auto_completar")
+						Gerar_Lista(objCampo, true);
+					else
+						Gerar_Lista(objCampo, false);
+				}
+			}
+			if (objCampo.getAttribute("funcao") != undefined)
+				Funcao(objCampo.name, "keyup", objCampo.value);
+			iQtde_Invalidar_Enter = 0;
+		}
+	}
+	
+	function Validar_Valor_Campo(objCampo, STipo_Campo) {
+		var SDigitos = '0123456789';
+		var SMoeda = '0123456789,';
+		
+		if (STipo_Campo == "data") {
+			objCampo.value = Corrigir_Valor_Campo(objCampo.value, SDigitos);
+			objCampo.value = Mascarar_Campo(objCampo.value, STipo_Campo);
+		}
+		
+		if (STipo_Campo == "hora") {
+			objCampo.value = Corrigir_Valor_Campo(objCampo.value, SDigitos);
+			objCampo.value = Mascarar_Campo(objCampo.value, STipo_Campo);
+		}
+		
+		if (STipo_Campo == "moeda") {
+			objCampo.value = Corrigir_Valor_Campo(objCampo.value, SMoeda);
+		}
+
+		if (STipo_Campo == "numero" || STipo_Campo == "ano" || STipo_Campo == "cpf" || STipo_Campo == "cnpj" || STipo_Campo == "cep") {
+			objCampo.value = Corrigir_Valor_Campo(objCampo.value, SDigitos);
+		}
+	}
+	
+	// Validar o Valor do Campo de acordo com o Tipo do Campo
+	function Corrigir_Valor_Campo(STexto, SCaracteres_Permitidos) {            
+		var cCaracter_Texto, cCaracter_Permitido, bCaracter_Valido;
+		var STextoFinal = "";
+		
+		for (var i = 0; i < STexto.length; i++) {
+			bCaracter_Valido = false;
+			cCaracter_Texto = STexto.charAt(i);
+			for (var j = 0; j < SCaracteres_Permitidos.length; j++) {
+				cCaracter_Permitido = SCaracteres_Permitidos.charAt(j);
+				if (cCaracter_Texto == cCaracter_Permitido)
+					bCaracter_Valido = true;
+			}
+			if (bCaracter_Valido == true)
+				STextoFinal += cCaracter_Texto;
+		}
+		return STextoFinal;
+	}
+	
+	// Validar o Valor do Campo de acordo com o Tipo do Campo
+	function Corrigir_Valor_Campo_Texto(STexto) {            
+		var iCaracter_Texto, cCaracter_Texto, cCaracter_Invalido, bCaracter_Valido;
+		var SCaracteres_Invalidos = "\"\'*";
+		var STextoFinal = "";
+		
+		for (var i = 0; i < STexto.length; i++) {
+			bCaracter_Valido = true;
+			cCaracter_Texto = STexto.charAt(i);
+			for (var j = 0; j < SCaracteres_Invalidos.length; j++) {
+				cCaracter_Invalido = SCaracteres_Invalidos.charAt(j);
+				if (cCaracter_Texto == cCaracter_Invalido)
+					bCaracter_Valido = false;
+			}
+			iCaracter_Texto = STexto.charCodeAt(i);
+			if (iCaracter_Texto == 13 || iCaracter_Texto == 10)
+				bCaracter_Valido = false;
+			if (bCaracter_Valido == true)
+				STextoFinal += cCaracter_Texto;
+		}
+		return STextoFinal;
+	}
+	
+	// Adiciona uma Máscara de acordo com o Tipo de Campo
+	function Mascarar_Campo(STexto, STipo_Campo) {
+		var cCaracter_Texto;
+		var STextoFinal = "";
+		
+		for (var i = 0; i < STexto.length; i++) {
+			if (i == 2 && STipo_Campo == "data")
+				STextoFinal += '/';
+			if (i == 4 && STipo_Campo == "data")
+				STextoFinal += '/';
+			if (i == 2 && STipo_Campo == "hora")
+				STextoFinal += ':';
+			STextoFinal += STexto.charAt(i);
+		}
+		return STextoFinal;
+	}
+	
+	// Função para determinar se a Tecla é o Enter
+	function Tecla_Enter(Evento) {
+		var charCode = getCharCode(Evento);
+		if (charCode == 13)
+			return true;
+		else
+			return false;
+	}
+	
+	// Função para determinar se a Tecla é o Down
+	function Tecla_Down(Evento) {
+		var charCode = getCharCode(Evento);
+		if (charCode == 40)
+			return true;
+		else
+			return false;
+	}
+	
+	// Função para determinar se a Tecla é o Up
+	function Tecla_Up(Evento) {
+		var charCode = getCharCode(Evento);
+		if (charCode == 38)
+			return true;
+		else
+			return false;
+	}
+	
+	// Função que emula o Tab a partir do Enter
+	function getCharCode(Evento) {
+		return charCode = (Evento.which) ? Evento.which : Evento.keyCode;
+	}
+	
+	
+	/*** Funções que validam os conteúdos dos componentes HTML ***/
+	var SCampo_Invalido = ""; 		// Nome do Campo Inválido
+	var iQtde_Invalidar_Enter = 0;	// Qtde de vezes que o Enter é invalidado
+	 
+	function Validar_Campo(objCampo, STipo_Campo) {
+		// Expressão Regular para verificar Data no formato dd/mm/aaaa sem a verificação do ano bissexto
+		var erData = /^((0?[1-9]|[12]\d)\/(0?[1-9]|1[0-2])|30\/(0?[13-9]|1[0-2])|31\/(0?[13578]|1[02]))\/(19|20)?\d{2}$/;
+		// Expressão Regular para verificar Horário HH:MM 24h
+		var erHora = /^([0-1]\d|2[0-3]):[0-5]\d$/;
+		// Expressão Regular para verificar Dígitos
+		var erDigitos = /^\d+$/;
+		// Expressão Regular para verificar Números com decimais em português (usando virgula "," para os decimais)
+		var erDecimalBR = /^[+-]?((\d+|\d{1,3}(\.\d{3})+)(\,\d*)?|\,\d+)$/;
+		// Expressão Regular para verificar Números com decimais em inglês (usando virgula "." para os decimais)
+		var erDecimalEN = /^[+-]?((\d+|\d{1,3}(\,\d{3})+)(\.\d*)?|\.\d+)$/;
+		// Expressão Regular para verificar valores de Moeda em Português (usando virgula "," para os decimais)
+		var erMoedaBR = /^\d+\,\d{2}$/;
+		// Expressão Regular para verificar valores de Moeda em Português (usando virgula "," para os decimais)
+		var erMoedaEN = /^\d{1,3}(\,\d{3})*\.\d{2}$/;
+		// Expressão Regular para verificar E-mail
+		var erEmail = /^[\w-]+(\.[\w-]+)*@(([\w-]{2,63}\.)+[A-Za-z]{2,6})$/;
+		// Expressão Regular para verificar E-mail com Separador(;)
+		var erEmail_Com_Separador = /^[\w-]+(\.[\w-]+)*@(([\w-]{2,63}\.)+[A-Za-z]{2,6})[[\s]*;[\s]*[\w-]+(\.[\w-]+)*@(([\w-]{2,63}\.)+[A-Za-z]{2,6})]*$/;
+
+		if (objCampo.value == "") {
+			objCampo.value = "";
+			return true;
+		}
+		
+		if (STipo_Campo == "texto_maiuscula") {
+			objCampo.value = objCampo.value.toUpperCase();
+		}
+		
+		if (STipo_Campo == "data") {
+			if (!Validar_Data(objCampo)) {
+				iQtde_Invalidar_Enter = 1;
+				objCampo.value = "";
+				alert("Data inválida.\nO formato correto é dd/mm/aaaa. Ex: 01/01/2000.");
+				return false;
+			}
+		}
+		
+		if (STipo_Campo == "hora") {
+			if (!Validar_Expr_Regular(erHora, objCampo.value)) {
+				iQtde_Invalidar_Enter = 1;
+				objCampo.value = "";
+				alert("Hora inválida.\nO formato correto é hh:mm. Ex: 23:59.");
+				return false;
+			}
+		}
+		
+		if (STipo_Campo == "cpf") {
+			if (!Validar_CPF(objCampo.value)) {
+				iQtde_Invalidar_Enter = 1;
+				objCampo.value = "";
+				alert("CPF inválido.");
+				return false;
+			}
+		}
+		
+		if (STipo_Campo == "cnpj") {
+			if (!Validar_CNPJ(objCampo.value)) {
+				iQtde_Invalidar_Enter = 1;
+				objCampo.value = "";
+				alert("CNPJ inválido.");
+				return false;
+			}
+		}
+		
+		if (STipo_Campo == "numero") {
+			if (!Validar_Expr_Regular(erDigitos, objCampo.value)) {
+				iQtde_Invalidar_Enter = 1;
+				objCampo.value = "";
+				alert("Valor inválido.");
+				return false;
+			}
+		}
+		
+		if (STipo_Campo == "ano") {
+			if (!Validar_Expr_Regular(erDigitos, objCampo.value) || objCampo.value.length < 4) {
+				iQtde_Invalidar_Enter = 1;
+				objCampo.value = "";
+				alert("Ano Inválido.");
+				return false;
+			}
+		}
+		
+		if (STipo_Campo == "moeda") {
+			if (!Validar_Moeda(objCampo)) {
+				iQtde_Invalidar_Enter = 1;
+				objCampo.value = "";
+				alert("Valor inválido.\nEx: 100000,00.");
+				return false;
+			}
+		}
+		
+		if (STipo_Campo == "email") {
+			if (!Validar_Expr_Regular(erEmail, objCampo.value)) {
+				iQtde_Invalidar_Enter = 1;
+				objCampo.value = "";
+				alert("E-mail inválido.");
+				return false;
+			} else
+				objCampo.value = objCampo.value.toLowerCase();
+		}
+		
+		if (STipo_Campo == "email_com_separador") {
+			if (!Validar_Expr_Regular(erEmail, objCampo.value) && !Validar_Expr_Regular(erEmail_Com_Separador, objCampo.value)) {
+				iQtde_Invalidar_Enter = 1;
+				objCampo.value = "";
+				alert("E-mail inválido.");
+				return false;
+			} else
+				objCampo.value = objCampo.value.toLowerCase();
+		}
+		
+		if (STipo_Campo == "cep") {
+			if (objCampo.value.length > 0 && objCampo.value.length < 8) {
+				iQtde_Invalidar_Enter = 1;
+				objCampo.value = "";
+				alert("O CEP deve conter 8 digitos.");
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	// Verificar se um Valor está de acordo com a Expressão Regular
+	function Validar_Expr_Regular(erExpr_Reg, SValor) {
+		return erExpr_Reg.test(SValor);
+	}
+	
+	//Validador de Data
+	function Validar_Data(objCampo) {
+		SData = objCampo.value;
+        
+		if (SData.length != 5 && SData.length != 8 && SData.length != 10)
+			return false;
+
+		if (SData.length == 5) {
+			DData = new Date();
+			iAno = DData.getFullYear();
+			SData += '/' + iAno;
+		}
+		
+		if (SData.length == 8) {
+			if (parseInt(SData.substr(6, 2)) < 40)
+				SData = SData.substr(0, 6) + '20' + SData.substr(6, 2);
+			else
+				SData = SData.substr(0, 6) + '19' + SData.substr(6, 2);
+		}
+		
+		if (SData.charAt(2) != '/' || SData.charAt(5) != '/')
+			return false;
+
+		if (isNaN(SData.substr(0, 2)))
+			return false;
+
+		if (isNaN(SData.substr(3, 2)))
+			return false;
+
+		if (isNaN(SData.substr(6, 4)))
+			return false;
+		
+		iDia = parseInt(SData.substr(0, 2));
+		iMes = parseInt(SData.substr(3, 2));
+		iAno = parseInt(SData.substr(6, 4));
+
+		switch(iMes){
+            case 2: {
+				if (((iAno % 4 != 0 || (iAno % 100 == 0 && iAno % 400 != 0)) && iDia > 28) || iDia > 29)
+					return false;
+				break;
+			}
+			case 4: case 6: case 9: case 11: {
+				if(iDia > 30)
+					return false;
+				break;
+			}
+			default: {
+                if(iMes <= 0)
+					return false;
+				if(iMes > 12)
+					return false;
+				if(iDia > 31)
+					return false;
+			}
+		}
+		objCampo.value = SData;
+		return true;
+	}
+	
+	// Validar se o CPF está correto
+	function Validar_CPF(SCPF) {
+		if (SCPF == "")
+			return true;
+			
+		if (SCPF.length != 11 || SCPF == "00000000000" || SCPF == "11111111111" || SCPF == "22222222222" || 
+				SCPF == "33333333333" || SCPF == "44444444444" || SCPF == "55555555555" || SCPF == "66666666666" || 
+				SCPF == "77777777777" || SCPF == "88888888888" || SCPF == "99999999999")
+			return false;
+
+		iTotal = 0;
+		
+		for (i = 0; i < 9; i++)
+			iTotal += parseInt(SCPF.charAt(i)) * (10 - i);
+		
+		iDigitoVerificador = 11 - (iTotal % 11);
+		
+		if (iDigitoVerificador == 10 || iDigitoVerificador == 11)
+			iDigitoVerificador = 0;
+			
+		if (iDigitoVerificador != parseInt(SCPF.charAt(9)))
+			return false;
+			
+		iTotal = 0;
+		
+		for (i = 0; i < 10; i ++)
+			iTotal += parseInt(SCPF.charAt(i)) * (11 - i);
+		
+		iDigitoVerificador = 11 - (iTotal % 11);
+		
+		if (iDigitoVerificador == 10 || iDigitoVerificador == 11)
+			iDigitoVerificador = 0;
+		
+		if (iDigitoVerificador != parseInt(SCPF.charAt(10)))
+			return false;
+		
+		return true;
+	}
+	
+	// Validar se o CNPJ está correto
+	function Validar_CNPJ(SCNPJ) {
+		if (SCNPJ == "")
+			return true;
+			
+		if (SCNPJ.length != 14 || SCNPJ == "00000000000000" || SCNPJ == "11111111111111" || SCNPJ == "22222222222222" || 
+				SCNPJ == "33333333333333" || SCNPJ == "44444444444444" || SCNPJ == "55555555555555" || SCNPJ == "66666666666666" || 
+				SCNPJ == "77777777777777" || SCNPJ == "88888888888888" || SCNPJ == "99999999999999")
+			return false;
+
+		iTotal = 0;
+		
+		for (i = 0; i < 4; i++) {
+			iTotal += parseInt(SCNPJ.charAt(i) * (5 - i));
+		}
+		
+		for (i = 4; i < 12; i++) {
+			iTotal += parseInt(SCNPJ.charAt(i) * (13 - i));
+		}
+		
+		iTotal = iTotal - (11 * (parseInt(iTotal / 11)));
+		
+		if (iTotal == 0 || iTotal == 1)
+			iDigitoVerificador = 0;
+		else
+			iDigitoVerificador = 11 - iTotal;
+		
+		if (iDigitoVerificador != parseInt(SCNPJ.charAt(12)))
+			return false;
+		
+		iTotal = 0;
+		
+		for (i = 0; i < 5; i++) {
+			iTotal += parseInt(SCNPJ.charAt(i)) * (6 - i);
+		}
+		
+		for (i = 5; i < 13; i++) {
+			iTotal += parseInt(SCNPJ.charAt(i)) * (14 - i);
+		}
+		
+		iTotal = iTotal - (11 * (parseInt(iTotal / 11)));
+		
+		if (iTotal == 0 || iTotal == 1)
+			iDigitoVerificador = 0;
+		else
+			iDigitoVerificador = 11 - iTotal;
+		
+		if (iDigitoVerificador != parseInt(SCNPJ.charAt(13)))
+			return false;
+			
+		return true;
+	}
+	
+	//Validador de Moeda no formato Brasileiro 0,00
+	function Validar_Moeda(objCampo) {
+		// Expressão Regular para verificar valores de Moeda em Português (usando virgula "," para os decimais)
+		//var erMoedaBR = /^\d{1,6}(\.\d{6})*\,\d{2}$/;
+		var erMoedaBR = /^\d+\,\d{2}$/;
+		var erMoedaBR2 = /^\d+\,\d$/;
+		var erMoedaBR3 = /^\d+\,$/;
+		var erMoedaBR4 = /^\d+$/;
+		
+		SMoeda = objCampo.value;
+		
+		if (erMoedaBR.test(SMoeda))
+			return true;
+		
+		if (erMoedaBR2.test(SMoeda)) {
+			objCampo.value = SMoeda + '0';
+			return true;
+		}
+		
+		if (erMoedaBR3.test(SMoeda)) {
+			objCampo.value = SMoeda + '00';
+			return true;
+		}
+		
+		if (erMoedaBR4.test(SMoeda)) {
+			objCampo.value = SMoeda + ',00';
+			return true;
+		}
+			
+		return false;
+	}
+	
+	/*** Funções que determinam o comportamento das funções focus() e blur() dos componentes HTML ***/
+	// Emula a função de focus no a para tab_item
+	function Link_Foco_Evt_Tab_Item(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		objCampo.parentNode.className = objCampo.parentNode.className + " ui-state-hover";
+	}
+	
+	// Emula a função de focus no a para tab_item
+	function Link_Normal_Evt_Tab_Item(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		SClasses = objCampo.parentNode.className.split(' ui-state-hover');
+		objCampo.parentNode.className = SClasses[0];
+	}
+	
+	// Emula a função de focus no input
+	function Campo_Foco_Evt(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		if (SCampo_Invalido == "") {
+            $('.datepicker').hide();
+			Ocultar_Listas();
+			Campo_Foco(objCampo);
+		} else {
+			if (SCampo_Invalido != "") {
+				var objCampo_Invalido = getObjetoHTML(SCampo_Invalido);	
+				if (SCampo_Invalido != objCampo.name) {
+					objCampo_Invalido.focus();
+					Campo_Foco(objCampo_Invalido);
+					SCampo_Invalido = "";
+				}
+			}
+		}
+	}
+	
+	// Emula a função de focus no input para o tipo de campo auto_completar
+	function Campo_Foco_Evt_Auto_Completar(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		if (SCampo_Invalido == "") {
+            $('.datepicker').hide();
+			Ocultar_Listas();
+			Campo_Foco(objCampo);
+			Mostrar_Lista(objCampo);
+		} else {
+			if (SCampo_Invalido != "") {
+				var objCampo_Invalido = getObjetoHTML(SCampo_Invalido);	
+				if (SCampo_Invalido != objCampo.name) {
+					objCampo_Invalido.focus();
+					Campo_Foco(objCampo_Invalido);
+					SCampo_Invalido = "";
+				}
+			}
+		}
+	}
+	
+	// Emula a função de focus no input para o tipo de campo auto_completar_sem_filtro
+	function Campo_Foco_Evt_Auto_Completar_Sem_Filtro(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		if (SCampo_Invalido == "") {
+            $('.datepicker').hide();
+			Campo_Foco(objCampo);
+			Ocultar_Listas();
+			Mostrar_Lista(objCampo, false);
+		} else {
+			if (SCampo_Invalido != "") {
+				var objCampo_Invalido = getObjetoHTML(SCampo_Invalido);	
+				if (SCampo_Invalido != objCampo.name) {
+					objCampo_Invalido.focus();
+					Campo_Foco(objCampo_Invalido);
+					SCampo_Invalido = "";
+				}
+			}
+		}
+	}
+	
+	// Emula a função de focus no input
+	function Campo_Foco(objCampo) {
+		$('#' + objCampo.id).addClass('ui-state-active');
+		objCampo.select();
+		if (objCampo.getAttribute("funcao") != undefined)
+			Funcao(objCampo.name, "focus", objCampo.value);
+	}
+	
+	// Emula a função de focus no input
+	function Campo_Normal_Evt(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Campo_Normal(objCampo, "");
+	}
+	
+	// Emula a função de focus no input para o tipo de campo texto_maiuscula
+	function Campo_Normal_Evt_Texto_Maiuscula(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Campo_Normal(objCampo, "texto_maiuscula");
+	}
+	
+	// Emula a função de focus no input para o tipo de campo texto_retirar_acentos
+	function Campo_Normal_Evt_Texto_Retirar_Acentos(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Campo_Normal(objCampo, "texto_retirar_acentos");
+	}
+	
+	// Emula a função de focus no input para o tipo de campo auto_completar
+	function Campo_Normal_Evt_Auto_Completar(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Campo_Normal(objCampo, "auto_completar");
+	}
+	
+	// Emula a função de focus no input para o tipo de campo auto_completar_sem_filtro
+	function Campo_Normal_Evt_Auto_Completar_Sem_Filtro(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Campo_Normal(objCampo, "auto_completar_sem_filtro");
+	}
+	
+	// Emula a função de focus no input para o tipo de campo data
+	function Campo_Normal_Evt_Data(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Campo_Normal(objCampo, "data");
+	}
+	
+	// Emula a função de focus no input para o tipo de campo hora
+	function Campo_Normal_Evt_Hora(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Campo_Normal(objCampo, "hora");
+	}
+	
+	// Emula a função de focus no input para o tipo de campo numero
+	function Campo_Normal_Evt_Numero(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Campo_Normal(objCampo, "numero");
+	}
+	
+	// Emula a função de focus no input para o tipo de campo moeda
+	function Campo_Normal_Evt_Moeda(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Campo_Normal(objCampo, "moeda");
+	}
+	
+	// Emula a função de focus no input para o tipo de campo ano
+	function Campo_Normal_Evt_Ano(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Campo_Normal(objCampo, "ano");
+	}
+	
+	// Emula a função de focus no input para o tipo de campo cpf
+	function Campo_Normal_Evt_CPF(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Campo_Normal(objCampo, "cpf");
+	}
+	
+	// Emula a função de focus no input para o tipo de campo cnpj
+	function Campo_Normal_Evt_CNPJ(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Campo_Normal(objCampo, "cnpj");
+	}
+	
+	// Emula a função de focus no input para o tipo de campo email
+	function Campo_Normal_Evt_Email(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Campo_Normal(objCampo, "email");
+	}
+	
+	// Emula a função de focus no input para o tipo de campo email_com_separador
+	function Campo_Normal_Evt_Email_Com_Separador(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Campo_Normal(objCampo, "email_com_separador");
+	}
+	
+	// Emula a função de focus no input para o tipo de campo cep
+	function Campo_Normal_Evt_CEP(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Campo_Normal(objCampo, "cep");
+	}
+	
+	// Emula a função de focus no input
+	function Campo_Normal(objCampo, STipo_Campo) {
+		$('#' + objCampo.id).removeClass('ui-state-active');
+		if (STipo_Campo == "texto_retirar_acentos")
+			Retirar_Acentos_Texto(objCampo.value);
+		if (!Validar_Campo(objCampo, STipo_Campo))
+			SCampo_Invalido = objCampo.id;
+		else {
+			if (objCampo.getAttribute("funcao") != undefined)
+				Funcao(objCampo.name, "blur", objCampo.value);
+		}
+	}
+	
+	// Função que retira os acentos de um texto
+	function Retirar_Acentos_Texto(STexto) {
+		STexto = STexto.toUpperCase();
+		var SAcentos = "ÁÀÃÂÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜ";
+		var STraducao ="AAAAAEEEEIIIIOOOOOUUUU";
+		var iPosic, iCarac;
+		var STempLog = "";
+
+		for (var i = 0; i < STexto.length; i++) {
+			iCarac = STexto.charAt(i);
+			iPosic  = SAcentos.indexOf(iCarac);
+			if (iPosic > -1)
+				STempLog += STraducao.charAt(iPosic);
+			else
+				STempLog += STexto.charAt(i);
+		}
+		return STempLog;
+	}
+	
+	// Emula a função de focus no radio normal
+	function Radio_Foco_Evt(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		objCampo.checked = true;
+		if (SCampo_Invalido == "") {
+            $('.datepicker').hide();
+			Ocultar_Listas();
+			if (objCampo.getAttribute("funcao") != undefined)
+				Funcao(objCampo.name, "focus", objCampo.value);
+		} else {
+			if (SCampo_Invalido != "") {
+				var objCampo_Invalido = getObjetoHTML(SCampo_Invalido);	
+				if (SCampo_Invalido != objCampo.name) {
+					objCampo_Invalido.focus();
+					Radio_Foco(objCampo_Invalido);
+					SCampo_Invalido = "";
+				}
+			}
+		}
+	}
+	
+	// Emula a função de focus no radio
+	function Radio_Foco(objCampo) {
+		var objCampo1 = getObjetoHTML(objCampo.id + '1');
+		iHeight = objCampo.style.height;
+		objCampo1.style.backgroundPosition = '0 -85px';
+		objCampo.select();
+	}
+	
+	// Emula a função de focus no radio normal
+	function Radio_Normal_Evt(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		if (objCampo.getAttribute("funcao") != undefined)
+			Funcao(objCampo.name, "blur", objCampo.value);
+	}
+	
+	// Emula a função de focus no radio
+	function Radio_Normal(objCampo) {
+		var objCampo1 = getObjetoHTML(objCampo.id + '1');
+		if (objCampo.checked == true)
+			objCampo1.style.backgroundPosition = '0 -57px';
+		else
+			objCampo1.style.backgroundPosition = '0 -1px';
+	}
+	
+	// Emula a função de focus no checkbox normal
+	function CheckBox_Foco_Evt(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		if (SCampo_Invalido == "") {
+            $('.datepicker').hide();
+			Ocultar_Listas();
+			if (objCampo.getAttribute("funcao") != undefined)
+				Funcao(objCampo.name, "focus", objCampo.value);
+		} else {
+			if (SCampo_Invalido != "") {
+				var objCampo_Invalido = getObjetoHTML(SCampo_Invalido);	
+				if (SCampo_Invalido != objCampo.name) {
+					objCampo_Invalido.focus();
+					CheckBox_Foco(objCampo_Invalido);
+					SCampo_Invalido = "";
+				}
+			}
+		}
+	}
+	
+	// Emula a função de focus no checkbox
+	function CheckBox_Foco(objCampo) {
+		var objCampo1 = getObjetoHTML(objCampo.id + '1');
+		iHeight = objCampo.style.height;
+		if (objCampo.checked == true)
+			objCampo1.style.backgroundPosition = '0 -85px';
+		else
+			objCampo1.style.backgroundPosition = '0 -29px';
+		objCampo.select();
+	}
+	
+	// Emula a função de focus no checkbox normal
+	function CheckBox_Normal_Evt(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		if (objCampo.getAttribute("funcao") != undefined)
+			Funcao(objCampo.name, "blur", objCampo.value);
+	}
+	
+	// Emula a função de focus no checkbox
+	function CheckBox_Normal(objCampo) {
+		var objCampo1 = getObjetoHTML(objCampo.id + '1');
+		if (objCampo.checked == true)
+			objCampo1.style.backgroundPosition = '0 -57px';
+		else
+			objCampo1.style.backgroundPosition = '0 -1px';
+	}
+	
+	// Emula a função de focus no select
+	function Select_Foco_Evt(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		if (SCampo_Invalido == "") {
+            $('.datepicker').hide();
+			Select_Foco(objCampo);
+			if (objCampo.getAttribute("funcao") != undefined)
+				Funcao(objCampo.name, "focus", objCampo.value);
+		} else {
+			if (SCampo_Invalido != "") {
+				var objCampo_Invalido = getObjetoHTML(SCampo_Invalido);	
+				if (SCampo_Invalido != objCampo.name) {
+					objCampo_Invalido.focus();
+					Campo_Foco(objCampo_Invalido);
+					SCampo_Invalido = "";
+				}
+			}
+		}
+	}
+	
+	// Emula a função de focus no select
+	function Select_Foco(objCampo) {
+		$('#' + objCampo.id).addClass('ui-state-active');
+	}
+	
+	// Emula a função de focus no select
+	function Select_Normal_Evt(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Select_Normal(objCampo);
+	}
+	
+	// Emula a função de focus no select
+	function Select_Normal(objCampo) {
+		$('#' + objCampo.id).removeClass('ui-state-active');
+		if (objCampo.getAttribute("funcao") != undefined)
+			Funcao(objCampo.name, "blur", objCampo.value);
+	}
+	
+	// Emula a função de focus no textarea
+	function TextArea_Foco_Evt(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		if (SCampo_Invalido == "")
+            $('.datepicker').hide();
+			TextArea_Foco(objCampo);
+			if (objCampo.getAttribute("funcao") != undefined)
+				Funcao(objCampo.name, "focus", objCampo.value);
+		else {
+			if (SCampo_Invalido != "") {
+				var objCampo_Invalido = getObjetoHTML(SCampo_Invalido);	
+				if (SCampo_Invalido != objCampo.name) {
+					objCampo_Invalido.focus();
+					Campo_Foco(objCampo_Invalido);
+					SCampo_Invalido = "";
+				}
+			}
+		}
+	}
+	
+	// Emula a função de focus no textarea
+	function TextArea_Foco(objCampo) {
+		$('#' + objCampo.id).addClass('ui-state-active');
+	}
+	
+	// Emula a função de focus no textarea
+	function TextArea_Normal_Evt(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		TextArea_Normal(objCampo);
+		if (objCampo.getAttribute("funcao") != undefined)
+			Funcao(objCampo.name, "blur", objCampo.value);
+	}
+	
+	// Emula a função de focus no textarea
+	function TextArea_Normal(objCampo) {
+		$('#' + objCampo.id).removeClass('ui-state-active');
+	}
+	
+	// Emula a função de focus no button
+	function Botao_Foco_Evt(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		if (SCampo_Invalido == "") {
+            $('.datepicker').hide();
+			Botao_Foco(objCampo);
+			if (objCampo.getAttribute("funcao") != undefined)
+				Funcao(objCampo.name, "focus", objCampo.value);
+        } else {
+			if (SCampo_Invalido != "") {
+				var objCampo_Invalido = getObjetoHTML(SCampo_Invalido);	
+				if (SCampo_Invalido != objCampo.name) {
+					objCampo_Invalido.focus();
+					Campo_Foco(objCampo_Invalido);
+					SCampo_Invalido = "";
+				}
+			}
+		}
+	}
+	
+	// Emula a função de focus no button
+	function Botao_Foco(objCampo) {
+		//objCampo.style.backgroundPosition = 'bottom left';
+	}
+	
+	// Emula a função de focus no button
+	function Botao_Normal_Evt(Evento) {
+		var objCampo = getObjetoHTML_Evento(Evento);
+		Botao_Normal(objCampo);
+	}
+	
+	// Emula a função de focus no button
+	function Botao_Normal(objCampo) {
+		//objCampo.style.backgroundPosition = 'top left';
+	}
+	
+	
+	/*** Funções para carregar uma lista dinâmica de valores em um SELECT a partir do valor de outro SELECT ***/
+	//Carregar uma Lista de Options de um Select a partir do valor de outro select
+	function Carregar_Lista_Select(SCampo, SCampo_Valor, SValor_Selecionado) {
+		var objCampo = getObjetoHTML(SCampo);
+		var objCampo_Valor = getObjetoHTML(SCampo_Valor);
+		objCampo.options.length = 0;
+		
+		lstLista = Listar_Dados(SCampo);
+				
+		for (i = 0; i < (lstLista.length/3); i++) {
+			if (lstLista[i * 3] == objCampo_Valor.value) {
+				if (objCampo.options.length == 0)
+					var iValor = lstLista[(i * 3) + 1];
+				if (SValor_Selecionado == lstLista[(i * 3) + 1])
+					var iValor = lstLista[(i * 3) + 1];
+				var objOpcao = document.createElement("option");
+				objOpcao.innerHTML = lstLista[(i * 3) + 2];
+				objOpcao.value = lstLista[(i * 3) + 1];
+				objCampo.appendChild(objOpcao);
+			}
+		}
+		objCampo.value = iValor;
+	}
+	
+	//Carregar uma Lista de Options de um Select a partir do valor de outro select
+	function Carregar_Lista_Select_Valor(SCampo, SCampo_Valor, SValor_Selecionado) {
+		var objCampo = getObjetoHTML(SCampo);
+		objCampo.options.length = 0;
+		
+		lstLista = Listar_Dados(SCampo);
+		
+		for (i = 0; i < (lstLista.length/3); i++) {
+			if (lstLista[i * 3] == SCampo_Valor) {
+				if (objCampo.options.length == 0)
+					var iValor = lstLista[(i * 3) + 1];
+				if (SValor_Selecionado == lstLista[(i * 3) + 1])
+					var iValor = lstLista[(i * 3) + 1];
+				var objOpcao = document.createElement("option");
+				objOpcao.innerHTML = lstLista[(i * 3) + 2];
+				objOpcao.value = lstLista[(i * 3) + 1];
+				objCampo.appendChild(objOpcao);
+			}
+		}
+		objCampo.value = iValor;
+	}
+	
+	
+	/*** Funções que geram o SUBMIT dos dados dos formulários ***/
+	//Submit de Formulários
+	var bSubmit = false;
+
+	function getSubmit() {
+		return bSubmit;
+	}
+
+	function Submit(event, SForm, SAction) {
+		if (Tecla_Enter(event) == true) {
+			Submit_Form(SForm, SAction);
+		}
+	}
+
+	function Submit_Form(SForm, SAction) {
+		var objForm = getObjetoHTML(SForm);
+		objForm.method="POST";
+		objForm.action = SAction;
+		bSubmit = true;
+		objForm.submit();
+	}
+
+	function Submit_Data(event, SCampo, SForm, SAction) {
+		var objCampo = getObjetoHTML(SCampo);
+		if (Tecla_Enter(event) == true) {
+			if (Validar_Data(SCampo) == true) {
+				Submit_Form(SForm, SAction);
+			} else {
+				objCampo.value= "";
+			}
+		}
+	}
+	
+	
+	/*** Funções para determinar a posição de componentes HTML ***/
+	//Função que determina a posição Left do Objeto HTML
+	function Left(objObjetoHTML) {
+		var iPosicaoLeft = 0;
+		if (objObjetoHTML.offsetParent) {
+			while (objObjetoHTML.offsetParent) {
+				iPosicaoLeft += objObjetoHTML.offsetLeft;
+				objObjetoHTML = objObjetoHTML.offsetParent;
+			}
+		} else if (objObjetoHTML.x)
+			iPosicaoLeft += objObjetoHTML.x;
+		return iPosicaoLeft;
+	}
+
+	//Função que determina a posição Top do Objeto HTML
+	function Top(objObjetoHTML) {
+		var iPosicaoTop = 0;
+		if (objObjetoHTML.offsetParent) {
+			while (objObjetoHTML.offsetParent) {
+						iPosicaoTop += objObjetoHTML.offsetTop;
+						objObjetoHTML = objObjetoHTML.offsetParent;
+			}
+		} else {
+			if (objObjetoHTML.y)
+				iPosicaoTop += objObjetoHTML.y;
+		}
+		return iPosicaoTop;
+	}
+	
+	
+	/*** Funções para trabalhar com campos auto_completar ***/
+	// Mostra a Lista do campo auto_completar e auto_completar_sem_filtro
+	function Mostrar_Lista(objCampo, bFiltrar) {
+		var SDIV_Lista = objCampo.getAttribute ? objCampo.getAttribute("div_lista") : "";
+		var objDIV_Lista = getObjetoHTML(SDIV_Lista);
+		objDIV_Lista.style.visibility  = "visible";
+		Gerar_Lista(objCampo, bFiltrar);
+	}
+
+	// Gerar a Lista do campo auto_completar e auto_completar_sem_filtro
+	function Gerar_Lista(objCampo, bFiltrar) {
+		var SDIV_Lista = objCampo.getAttribute ? objCampo.getAttribute("div_lista") : "";
+		var objDIV_Lista = getObjetoHTML(SDIV_Lista);
+		objDIV_Lista.style.top = (Top(objCampo) + 24) + "px";
+		objDIV_Lista.style.left = (Left(objCampo)) + "px";
+		
+		lstLista_Todos = Listar_Dados(objCampo.name);
+		if (bFiltrar == true)
+			lstLista_Filtrados = Filtrar_Dados(lstLista_Todos, objCampo.value);
+		else
+			lstLista_Filtrados = lstLista_Todos.slice(0, lstLista_Todos.length);
+		SSELECT_Lista = objCampo.name + "_lista";
+		if (lstLista_Filtrados.length > 14) {
+			SDIV_Lista_Conteudo = "<select size='7' name='" + SSELECT_Lista + "' id='" + SSELECT_Lista + "' " +
+					"onclick=\"Ocultar_Lista_Selecionar_Item('" + objCampo.name + 
+					"',this.value);\" style=\"width:" + (parseInt(objCampo.style.width)) + "px;height:123px\">";
+		} else {
+			SDIV_Lista_Conteudo = "<select size='" + (lstLista_Filtrados.length / 2) + "' name='" + SSELECT_Lista + "' " +
+					"id='" + SSELECT_Lista + "' onclick=\"Ocultar_Lista_Selecionar_Item('" + 
+					objCampo.name + "',this.value);\" style=\"width:" + (parseInt(objCampo.style.width)) + "px;height:123px\">";
+		}
+		iIndice_Selecionado = -1;
+		for (i = 0; i < (lstLista_Filtrados.length/ 2); i++) {
+			STexto = Retirar_Acentos_Texto(objCampo.value);
+			SRegistro = Retirar_Acentos_Texto(lstLista[(i * 2) + 1].substr(0, STexto.length));
+			if (SRegistro == STexto && iIndice_Selecionado == -1) {
+				iIndice_Selecionado = i;
+				SDIV_Lista_Conteudo += "<option value='" + lstLista_Filtrados[i * 2] + "' selected>" + 
+						lstLista_Filtrados[(i * 2) + 1] + "\n";
+			} else
+				SDIV_Lista_Conteudo += "<option value='" + lstLista_Filtrados[i * 2] + "'>" + 
+						lstLista_Filtrados[(i * 2) + 1] + "\n";
+		}
+		SDIV_Lista_Conteudo += "</select>";
+		Reescrever_ObjetoHTML(SDIV_Lista, SDIV_Lista_Conteudo);
+		var objSELECT_Lista = getObjetoHTML(SSELECT_Lista);
+	}
+
+	// Filtrar os dados da Lista do campo auto_completar e auto_completar_sem_filtro
+	function Filtrar_Dados(lstLista, STexto) {
+		lstLista_Resultado = new Array();
+		j = 0;
+		for (k = 0; k < (lstLista.length / 2); k++) {
+			SRegistro = Retirar_Acentos_Texto(lstLista[(k * 2) + 1].substr(0, STexto.length));
+			STexto = Retirar_Acentos_Texto(STexto);
+			if (SRegistro == STexto) {
+				lstLista_Resultado[j++] = lstLista[k * 2];
+				lstLista_Resultado[j++] = lstLista[(k * 2) + 1];
+			}
+		}
+		return lstLista_Resultado;
+	}
+
+	// Ocultar a Lista do campo auto_completar e auto_completar_sem_filtro
+	function Ocultar_Listas() {
+		var lstObjetos = getObjetoHTML_Tag("input");
+		for (var i = 0; i < lstObjetos.length; i++) {
+			switch (lstObjetos[i].type) {
+				case "text":	
+					var STipo_Campo = "texto";
+					for (var j = 0; j < lstObjetos[i].attributes.length; j++) {
+						if (lstObjetos[i].attributes[j].nodeName == "campo"){
+							STipo_Campo = lstObjetos[i].attributes[j].value;
+						}
+					}
+					
+					if ((STipo_Campo == "auto_completar") || (STipo_Campo == "auto_completar_sem_filtro"))
+						Ocultar_Lista(lstObjetos[i]);
+			}
+		}		
+	}
+	
+	// Ocultar a Lista do campo auto_completar e auto_completar_sem_filtro
+	function Ocultar_Lista(objCampo) {
+		var SDIV_Lista = objCampo.getAttribute ? objCampo.getAttribute("div_lista") : "";
+		var objDIV_Lista = getObjetoHTML(SDIV_Lista);
+		if (objDIV_Lista.style.visibility == "visible") {
+			objDIV_Lista.style.visibility = "hidden";
+			lstLista_Todos = Listar_Dados(objCampo.name);
+			if (lstLista_Todos.length > 0) {
+				var objSELECT_Lista = getObjetoHTML(objCampo.name + "_lista");
+				SValor_Codigo = objSELECT_Lista[objSELECT_Lista.selectedIndex].value;
+				for (k = 0; k < (lstLista.length / 2); k++) {
+					if (lstLista_Todos[(k * 2)] == SValor_Codigo)
+						Selecionar_Item(objCampo, lstLista_Todos[(k * 2)], lstLista_Todos[(k * 2) + 1]);
+				}
+			} else
+				Selecionar_Item(objCampo, 0, "");
+		}
+	}
+
+	// Selecionar o Item da Lista do campo auto_completar e auto_completar_sem_filtro
+	function Selecionar_Item(objCampo, SValor_Codigo, SValor_Nome) {
+		var SCampo_Codigo = objCampo.getAttribute ? objCampo.getAttribute("campo_codigo") : "";
+		var objCampo_Codigo = getObjetoHTML(SCampo_Codigo);
+		objCampo_Codigo.value = SValor_Codigo;
+		objCampo.value = SValor_Nome;
+	}
+
+	// Selecionar o Item ao Ocultar a Lista do campo auto_completar
+	function Ocultar_Lista_Selecionar_Item(SCampo, SValor_Codigo) {
+		var objCampo = getObjetoHTML(SCampo);
+		var SDIV_Lista = objCampo.getAttribute ? objCampo.getAttribute("div_lista") : "";
+		var objDIV_Lista = getObjetoHTML(SDIV_Lista);
+		if (objDIV_Lista.style.visibility == "visible") {
+			objDIV_Lista.style.visibility = "hidden";
+			lstLista_Todos = Listar_Dados(objCampo.name);
+			if (lstLista_Todos.length > 0) {
+				var objSELECT_Lista = getObjetoHTML(objCampo.name + "_lista");
+				SValor_Codigo = objSELECT_Lista[objSELECT_Lista.selectedIndex].value;
+				for (k = 0; k < (lstLista.length / 2); k++) {
+					if (lstLista_Todos[(k * 2)] == SValor_Codigo)
+						Selecionar_Item(objCampo, lstLista_Todos[(k * 2)], lstLista_Todos[(k * 2) + 1]);
+				}
+			} else
+				Selecionar_Item(objCampo, 0, "");
+		}
+		//Selecionar_Lista_Item_Codigo(objCampo, SValor_Codigo);
+		if (objCampo.getAttribute("funcao") != undefined)
+			Funcao(objCampo.name, "change", objCampo.value);
+		var objProximo_Campo = getObjetoHTML_TabIndex(parseInt(objCampo.tabIndex) + 1, objCampo);
+		objProximo_Campo.focus();
+	}
+
+	// Selecionar o Código do Item da Lista e preencher os campos
+	function Selecionar_Lista_Item_Codigo(objCampo, SValor_Codigo) {
+		var SCampo_Codigo = objCampo.getAttribute ? objCampo.getAttribute("campo_codigo") : "";
+		var objCampo_Codigo = getObjetoHTML(SCampo_Codigo);
+		lstLista_Todos = Listar_Dados(objCampo.name);
+		SValor_Nome = "";
+		for (i = 0; i < (lstLista_Todos.length / 2); i++) {
+			if (lstLista_Todos[i * 2] == SValor_Codigo) {
+				SValor_Nome = lstLista_Todos[(i * 2) + 1];
+			}
+		}
+		if (SValor_Nome != "") {
+			objCampo_Codigo.value = SValor_Codigo;
+			objCampo.value = SValor_Nome;
+		} else {
+			objCampo_Codigo.value = 0;
+			objCampo.value = ""; 
+		}
+	}
+	
+	// Função para reescrever um componente HTML
+	function Reescrever_ObjetoHTML(SCampo, SValor) {
+		objCampo = getObjetoHTML(SCampo);
+		if (typeof(objCampo.innerHTML) == "string") 
+			objCampo.innerHTML=SValor;
+	}
+	
+	
+	/*** Funções urlencode e urldecode do PHP para o JavaScript ***/
+	// Função URLEncode para JavaScript
+	function URLEncode( SValor ) {
+	 
+		var histogram = {}, tmp_arr = [];
+		var ret = (SValor + '').toString();
+	 
+		var replacer = function(search, replace, SValor) {
+			var tmp_arr = [];
+			tmp_arr = SValor.split(search);
+			return tmp_arr.join(replace);
+		};
+	 
+		// The histogram is identical to the one in urldecode.
+		histogram["'"]   = '%27';
+		histogram['(']   = '%28';
+		histogram[')']   = '%29';
+		histogram['*']   = '%2A';
+		histogram['~']   = '%7E';
+		histogram['!']   = '%21';
+		histogram['%20'] = '+';
+		histogram['\u20AC'] = '%80';
+		histogram['\u0081'] = '%81';
+		histogram['\u201A'] = '%82';
+		histogram['\u0192'] = '%83';
+		histogram['\u201E'] = '%84';
+		histogram['\u2026'] = '%85';
+		histogram['\u2020'] = '%86';
+		histogram['\u2021'] = '%87';
+		histogram['\u02C6'] = '%88';
+		histogram['\u2030'] = '%89';
+		histogram['\u0160'] = '%8A';
+		histogram['\u2039'] = '%8B';
+		histogram['\u0152'] = '%8C';
+		histogram['\u008D'] = '%8D';
+		histogram['\u017D'] = '%8E';
+		histogram['\u008F'] = '%8F';
+		histogram['\u0090'] = '%90';
+		histogram['\u2018'] = '%91';
+		histogram['\u2019'] = '%92';
+		histogram['\u201C'] = '%93';
+		histogram['\u201D'] = '%94';
+		histogram['\u2022'] = '%95';
+		histogram['\u2013'] = '%96';
+		histogram['\u2014'] = '%97';
+		histogram['\u02DC'] = '%98';
+		histogram['\u2122'] = '%99';
+		histogram['\u0161'] = '%9A';
+		histogram['\u203A'] = '%9B';
+		histogram['\u0153'] = '%9C';
+		histogram['\u009D'] = '%9D';
+		histogram['\u017E'] = '%9E';
+		histogram['\u0178'] = '%9F';
+	 
+		// Begin with encodeURIComponent, which most resembles PHP's encoding functions
+		ret = encodeURIComponent(ret);
+	 
+		for (search in histogram) {
+			replace = histogram[search];
+			ret = replacer(search, replace, ret) // Custom replace. No regexing
+		}
+	 
+		// Uppercase for full PHP compatibility
+		return ret.replace(/(\%([a-z0-9]{2}))/g, function(full, m1, m2) {
+			return "%" + m2.toUpperCase();
+		});
+	 
+		//return ret;
+	}
+	 
+	// Função URLDecode para JavaScript
+	function URLDecode( SValor ) {
+	 
+		var histogram = {};
+		var ret = SValor.toString();
+	 
+		var replacer = function(search, replace, SValor) {
+			var tmp_arr = [];
+			tmp_arr = SValor.split(search);
+			return tmp_arr.join(replace);
+		};
+	 
+		// The histogram is identical to the one in urlencode.
+		histogram["'"]   = '%27';
+		histogram['(']   = '%28';
+		histogram[')']   = '%29';
+		histogram['*']   = '%2A';
+		histogram['~']   = '%7E';
+		histogram['!']   = '%21';
+		histogram['%20'] = '+';
+		histogram['\u20AC'] = '%80';
+		histogram['\u0081'] = '%81';
+		histogram['\u201A'] = '%82';
+		histogram['\u0192'] = '%83';
+		histogram['\u201E'] = '%84';
+		histogram['\u2026'] = '%85';
+		histogram['\u2020'] = '%86';
+		histogram['\u2021'] = '%87';
+		histogram['\u02C6'] = '%88';
+		histogram['\u2030'] = '%89';
+		histogram['\u0160'] = '%8A';
+		histogram['\u2039'] = '%8B';
+		histogram['\u0152'] = '%8C';
+		histogram['\u008D'] = '%8D';
+		histogram['\u017D'] = '%8E';
+		histogram['\u008F'] = '%8F';
+		histogram['\u0090'] = '%90';
+		histogram['\u2018'] = '%91';
+		histogram['\u2019'] = '%92';
+		histogram['\u201C'] = '%93';
+		histogram['\u201D'] = '%94';
+		histogram['\u2022'] = '%95';
+		histogram['\u2013'] = '%96';
+		histogram['\u2014'] = '%97';
+		histogram['\u02DC'] = '%98';
+		histogram['\u2122'] = '%99';
+		histogram['\u0161'] = '%9A';
+		histogram['\u203A'] = '%9B';
+		histogram['\u0153'] = '%9C';
+		histogram['\u009D'] = '%9D';
+		histogram['\u017E'] = '%9E';
+		histogram['\u0178'] = '%9F';
+	 
+		for (replace in histogram) {
+			search = histogram[replace]; // Switch order when decoding
+			ret = replacer(search, replace, ret) // Custom replace. No regexing   
+		}
+	 
+		// End with decodeURIComponent, which most resembles PHP's encoding functions
+		ret = decodeURIComponent(ret);
+	 
+		return ret;
+	}

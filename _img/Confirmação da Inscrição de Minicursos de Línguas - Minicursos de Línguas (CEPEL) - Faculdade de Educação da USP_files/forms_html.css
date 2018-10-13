@@ -1,0 +1,1145 @@
+/** 
+ * Estilos utilizados nos componentes HTML das Páginas do Site da FEUSP
+ * Data Criação: 10/09/2009
+ * Autor da Criação: Fernando Faria
+ * Data Última Alteração: 07/12/2012
+ * Autor da Alteração: Fernando Faria
+ * Versão: 8
+ */
+
+/**
+ * Estilos personalizados para uso na página
+ **/
+.titulo {
+	color: #1976bc;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 22px;
+	text-decoration: none;
+	vertical-align:middle;
+}
+
+.subtitulo {
+	color: #1976bc;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 18px;
+	text-decoration: none;
+	vertical-align:middle;
+}
+
+.subtitulo2 {
+	color: #1976bc;
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 18px;
+	text-decoration: none;
+	vertical-align:middle;
+}
+
+.Titulo_Pagina {
+	color: #1976bc;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.impressao_descricao {
+	color: #1976bc;
+	font-weight: bold;
+}
+
+.impressao_campo {
+	font-weight: bold;
+}
+
+.cinza {
+	color: #A6A6A6;
+}
+
+.vermelho {
+	color: #d71921;
+}
+
+
+
+/**
+ * Estilo padrão dos Componentes HTML 
+ **/
+html {
+	height: 100%;
+}
+
+body {
+    background: #0067A1 url('../imagens/tela/fundo_lateral.png') repeat-x;
+	font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+	font-weight: normal;
+	height: 100%;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 0px;
+}
+
+a, a:hover, a:link, a:visited {
+	color: #1976bc;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+table, th, td {
+    font: inherit;
+}
+
+
+form {
+	margin: 0px;
+	padding: 0px;
+}
+
+button {
+	display: inline-block;
+	height: 22px;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+input {
+	display: inline-block;
+	height: 22px;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+label {
+	color: #1976bc; 
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 16px;
+}
+
+select {
+	display: block;
+	height: 22px;
+	padding-bottom: 1px;
+	padding-right: 3px;
+	padding-top: 1px;
+}
+
+span.campo {
+	display: inline-block;
+	height: 18px;
+	padding-left: 2px;
+	padding-right: 2px;
+	padding-top: 2px;
+}
+
+textarea {
+	padding: 3px;
+}
+
+
+
+/** Estilos para Tabelas de formulários **/
+tr.linha_alt0 td {
+	background: #FAFAFF;
+}
+
+tr.linha_alt1 td {
+	background: #B8D9F5;
+}
+
+
+
+/**
+ * Estilos da Estrutura da página em CSS com DIV 
+ **/
+/** Principal **/
+div#pagina {
+	background-color: #FFFFFF;
+	position: relative;
+	clear: both;
+	width: 913px;
+	min-height: 100%;
+	bottom: -200px;
+	left: 50%;
+	top: 0px;
+	margin-left: -457px;
+}
+
+* html div#pagina {
+	height: 100%;
+}
+
+/** Cabeçalho **/
+div#pagina_cabecalho {
+	background-color: #FFFFFF;
+	position: relative;
+	clear: both;
+	height: 120px;
+	width: 939px;
+	margin-left: -13px;
+	margin-right: -13px;
+}
+
+div#pagina_cabecalho_fundo {	
+	position: absolute;
+	height: 120px;
+	width: 939px;
+	left: 0px;
+	top: 0px;
+}
+
+div#pagina_cabecalho_logo {	
+	position: absolute;
+	height: 42px;
+	width: 463px;
+	left: 70px;
+	top: 37px;
+	z-index: 2;
+}
+
+/** Navegação do Sistema **/
+div#pagina_navegacao {
+	position: relative;
+	clear: both;
+	width: 893px;
+	left: 10px;
+	right: 10px;
+	margin-bottom: 5px;
+}
+
+/** Conteúdo que ocupa a página toda **/
+div#pagina_conteudo_total {
+	position: relative;
+	clear: both;
+	height: auto;
+	width: 893px;
+	left: 10px;
+	right: 10px;
+	padding-bottom: 10px;
+}
+
+/** Menu da Esquerda **/
+div#pagina_menu {
+	position: relative;
+	float: left;
+	height: auto;
+	width: 200px;
+	left: 30px;
+	padding-bottom: 10px;
+}
+
+/** Conteúdo que fica na direita **/
+div#pagina_conteudo {
+	position: relative;
+	float: right;
+	height: auto;
+	width: 640px;
+	right: 10px;
+	padding-bottom: 10px;
+}
+
+div#pagina_menu_cabecalho_rodape {
+	position: relative;
+	clear: both;
+	height: 35px;
+	width: 100%;
+}
+
+div#pagina_titulo {
+	position: relative;
+	float: right;
+	height: auto;
+	width: 600px;
+	padding-bottom: 40px;
+	padding-right: 40px;
+	padding-top: 3px;
+}
+
+/** Rodapé **/
+div#pagina_rodape {
+	position: absolute;
+	clear: both;
+	color: #FFFFFF;
+	font-size: 11px;
+	font-weight: normal;
+	height: 35px;
+	width: 100%;
+	bottom: 0px;
+	margin-left: -13px;
+	margin-right: -13px;
+	text-decoration: none;
+}
+
+
+
+/**
+ * Estilos do Cabeçalho das Páginas
+ **/
+div#pagina_cabecalho_links a, div#pagina_cabecalho_links a:hover, div#pagina_cabecalho_links a:link, div#pagina_cabecalho_links a:visited {
+	color: #FFFFFF;
+	font-size: 13px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+div#pagina_cabecalho_links a:hover, div#pagina_cabecalho_links a.selecionado {
+	color: #A6A6A6;
+}
+
+
+
+/**
+ * Estilos da Navegação da Página 
+ **/
+/** Tag a **/
+a.navegacao_link, a.navegacao_link:hover, a.navegacao_link:link, a.navegacao_link:visited {
+	color: #000066;
+	font-size: 11px;
+	font-weight: bold;
+	line-height: 20px;
+	text-decoration: none;
+}
+
+/*** Tag table, thead, tbody, tfoot, tr, th, td ***/
+table.navegacao {
+	color: #464648;
+	border-bottom: 1px solid #464648;
+	border-left: 0px;
+	border-right: 0px;
+	border-top: 0px;
+	font-size: 11px;
+	font-weight: normal;
+	line-height: 20px;
+	text-decoration: none;
+}
+
+
+
+/**
+ * Estilos da Menu Esquerdo da Página 
+ **/
+/** Estilos do menu do Treeview **/
+.menu_titulo {
+	color: #000066;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 25px;
+	text-decoration: none;
+}
+
+.menu_subtitulo {
+	color: #000066;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 25px;
+	text-decoration: none;
+}
+
+.menu_subtitulo2 {
+	color: #000066;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 16px;
+	text-decoration: none;
+}
+
+
+
+/**
+ * Estilos do Rodapé das Páginas
+ **/
+div#pagina_rodape a, div#pagina_rodape a:hover, div#pagina_rodape a:link, div#pagina_rodape a:visited {
+	color: #FFFFFF;
+	font-size: 11px;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+
+/**
+ * Estilos do Conteúdo das Páginas 
+ **/
+#pagina_conteudo a, #pagina_conteudo a:hover, #pagina_conteudo a:link, #pagina_conteudo a:visited {
+	color: #000066;
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+a.seta_azul {
+	 background: url('../imagens/tela/seta_azul.png') no-repeat right center;
+	 padding-right: 12px;
+	 vertical-align: middle;
+}
+
+
+
+/**
+ * Estilos para Formulários das Páginas
+ **/
+/** Tag button **/
+button.botao_100 {
+	width: 100px;
+}
+
+button.botao_150 {
+	width: 150px;
+}
+
+button.botao_200 {
+	width: 200px;
+}
+
+/** Botão Login (Amarelo) **/
+button.botao_login.ui-state-default {
+	background: #fffae0 url(../imagens/jquery/ui-bg_glass_75_fffae0_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #ffef9e; 
+	color: #f6a828; 
+	font-weight: bold;
+}
+
+button.botao_login.ui-state-hover, button.botao_login.ui-state-focus {
+	background: #ffe770 url(../imagens/jquery/ui-bg_glass_75_ffe770_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #ffef9e; 
+	color: #f6a828; 
+	font-weight: bold; 
+}
+
+button.botao_login .ui-icon {
+	background-image: url(../imagens/jquery/ui-icons_f6a828_256x240.png); 
+	height: 16px; 
+	width: 16px; 
+}
+
+/** Botão Gravar (Verde) **/
+button.botao_gravar.ui-state-default {
+	background: #f0fff0 url(../imagens/jquery/ui-bg_glass_75_f0fff0_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #ccffcc; 
+	color: #00cd00; 
+	font-weight: bold;
+}
+
+button.botao_gravar.ui-state-hover, button.botao_gravar.ui-state-focus {
+	background: #adffad url(../imagens/jquery/ui-bg_glass_75_adffad_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #ccffcc; 
+	color: #00cd00; 
+	font-weight: bold; 
+}
+
+button.botao_gravar .ui-icon {
+	background-image: url(../imagens/jquery/ui-icons_00cd00_256x240.png); 
+	height: 16px; 
+	width: 16px; 
+}
+
+/** Botão Pesquisar (Azul Claro) **/
+button.botao_pesquisar.ui-state-default {
+	background: #f2f8fd url(../imagens/jquery/ui-bg_glass_75_f2f8fd_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #cee5f7; 
+	color: #217bc0; 
+	font-weight: bold;
+}
+
+button.botao_pesquisar.ui-state-hover, button.botao_pesquisar.ui-state-focus {
+	background: #b0d5f2 url(../imagens/jquery/ui-bg_glass_75_b0d5f2_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #cee5f7; 
+	color: #217bc0; 
+	font-weight: bold; 
+}
+
+button.botao_pesquisar .ui-icon {
+	background-image: url(../imagens/jquery/ui-icons_217bc0_256x240.png); 
+	height: 16px; 
+	width: 16px; 
+}
+
+/** Botão Novo (Verde) **/
+button.botao_novo.ui-state-default {
+	background: #f0fff0 url(../imagens/jquery/ui-bg_glass_75_f0fff0_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #ccffcc; 
+	color: #00cd00; 
+	font-weight: bold;
+}
+
+button.botao_novo.ui-state-hover, button.botao_novo.ui-state-focus {
+	background: #adffad url(../imagens/jquery/ui-bg_glass_75_adffad_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #ccffcc; 
+	color: #00cd00; 
+	font-weight: bold; 
+}
+
+button.botao_novo .ui-icon {
+	background-image: url(../imagens/jquery/ui-icons_00cd00_256x240.png); 
+	height: 16px; 
+	width: 16px; 
+}
+
+/** Botão Excluir (Vermelho) **/
+button.botao_excluir.ui-state-default {
+	background: #ffffff url(../imagens/jquery/ui-bg_glass_75_ffffff_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #ffd6d6; 
+	color: #f00000; 
+	font-weight: bold;
+}
+
+button.botao_excluir.ui-state-hover, button.botao_excluir.ui-state-focus {
+	background: #ffd1d2 url(../imagens/jquery/ui-bg_glass_75_ffd1d2_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #ffd6d6; 
+	color: #f00000; 
+	font-weight: bold; 
+}
+
+button.botao_excluir .ui-icon {
+	background-image: url(../imagens/jquery/ui-icons_f00000_256x240.png); 
+	height: 16px; 
+	width: 16px; 
+}
+
+/** Botão Imprimir (Azul Claro) **/
+button.botao_imprimir.ui-state-default {
+	background: #f2f8fd url(../imagens/jquery/ui-bg_glass_75_f2f8fd_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #cee5f7; 
+	color: #217bc0; 
+	font-weight: bold;
+}
+
+button.botao_imprimir.ui-state-hover, button.botao_imprimir.ui-state-focus {
+	background: #b0d5f2 url(../imagens/jquery/ui-bg_glass_75_b0d5f2_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #cee5f7; 
+	color: #217bc0; 
+	font-weight: bold; 
+}
+
+button.botao_imprimir .ui-icon {
+	background-image: url(../imagens/jquery/ui-icons_217bc0_256x240.png); 
+	height: 16px; 
+	width: 16px; 
+}
+
+/** Botão Voltar (Azul Claro) **/
+button.botao_voltar.ui-state-default {
+	background: #f2f8fd url(../imagens/jquery/ui-bg_glass_75_f2f8fd_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #cee5f7; 
+	color: #217bc0; 
+	font-weight: bold;
+}
+
+button.botao_voltar.ui-state-hover, button.botao_voltar.ui-state-focus {
+	background: #b0d5f2 url(../imagens/jquery/ui-bg_glass_75_b0d5f2_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #cee5f7; 
+	color: #217bc0; 
+	font-weight: bold; 
+}
+
+button.botao_voltar .ui-icon {
+	background-image: url(../imagens/jquery/ui-icons_217bc0_256x240.png); 
+	height: 16px; 
+	width: 16px; 
+}
+
+/** Botão Fechar (Azul Claro) **/
+button.botao_fechar.ui-state-default {
+	background: #f2f8fd url(../imagens/jquery/ui-bg_glass_75_f2f8fd_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #cee5f7; 
+	color: #217bc0; 
+	font-weight: bold;
+}
+
+button.botao_fechar.ui-state-hover, button.botao_fechar.ui-state-focus {
+	background: #b0d5f2 url(../imagens/jquery/ui-bg_glass_75_b0d5f2_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #cee5f7; 
+	color: #217bc0; 
+	font-weight: bold; 
+}
+
+button.botao_fechar .ui-icon {
+	background-image: url(../imagens/jquery/ui-icons_217bc0_256x240.png); 
+	height: 16px; 
+	width: 16px; 
+}
+
+/** Botão E-mail (Azul Claro) **/
+button.botao_email.ui-state-default {
+	background: #f2f8fd url(../imagens/jquery/ui-bg_glass_75_f2f8fd_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #cee5f7; 
+	color: #217bc0; 
+	font-weight: bold;
+}
+
+button.botao_email.ui-state-hover, button.botao_email.ui-state-focus {
+	background: #b0d5f2 url(../imagens/jquery/ui-bg_glass_75_b0d5f2_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #cee5f7; 
+	color: #217bc0; 
+	font-weight: bold; 
+}
+
+button.botao_email .ui-icon {
+	background-image: url(../imagens/jquery/ui-icons_217bc0_256x240.png); 
+	height: 16px; 
+	width: 16px; 
+}
+
+
+/**
+ * Estilos do componente JQuery jqGrid
+ **/
+.ui-jqgrid td, .ui-jqgrid th {
+	font-size: 11px;
+	line-height: 16px;
+}
+
+.ui-priority-secondary.ui-state-hover td { 
+	background: #c2c2ff url(../imagens/jquery/ui-bg_glass_75_c2c2ff_1x400.png) 50% 50% repeat-x; 
+	font-weight: normal; 
+}
+
+span#sp_1 {
+	display: inline;
+}
+
+
+
+/**
+ * Estilos do componente JQuery Dialog 
+ **/
+/** Dialog de Confirmação (Azul-Claro) **/
+.confirmacao .ui-widget-header {
+	background: #b0d5f2 url(../imagens/jquery/ui-bg_glass_75_b0d5f2_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #cee5f7; 
+	color: #217bc0; 
+	font-weight: bold; 
+}
+
+.confirmacao .ui-widget-header .ui-state-hover, .confirmacao .ui-widget-header .ui-state-focus, .ui-widget-content.confirmacao, 
+.confirmacao .ui-widget-content, .confirmacao .ui-dialog-content {
+	background: #f2f8fd url(../imagens/jquery/ui-bg_glass_75_f2f8fd_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #cee5f7; 
+	color: #217bc0; 
+}
+
+.confirmacao .ui-widget-content .ui-state-default {
+	background: #f2f8fd url(../imagens/jquery/ui-bg_glass_75_f2f8fd_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #cee5f7; 
+	color: #217bc0; 
+	font-weight: bold;
+}
+
+.confirmacao .ui-widget-content .ui-state-hover {
+	background: #b0d5f2 url(../imagens/jquery/ui-bg_glass_75_b0d5f2_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #cee5f7; 
+	color: #217bc0; 
+	font-weight: bold; 
+}
+
+.confirmacao .ui-widget-header .ui-icon, .confirmacao .ui-dialog-content .ui-icon {
+	background-image: url(../imagens/jquery/ui-icons_217bc0_256x240.png); 
+	height: 16px; 
+	width: 16px; 
+}
+
+.confirmacao .ui-dialog-buttonset button {
+	display: inline-block;
+}
+
+/** Dialog de Sucesso (Verde) **/
+.sucesso .ui-widget-header, .sucesso .ui-widget-content .ui-state-hover {
+	background: #adffad url(../imagens/jquery/ui-bg_glass_75_adffad_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #ccffcc; 
+	color: #00cd00; 
+	font-weight: bold; 
+}
+
+.sucesso .ui-widget-header .ui-state-hover, .sucesso .ui-widget-header .ui-state-focus, .ui-widget-content.sucesso, .sucesso .ui-widget-content, 
+.sucesso .ui-dialog-content {
+	background: #f0fff0 url(../imagens/jquery/ui-bg_glass_75_f0fff0_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #ccffcc; 
+	color: #00cd00;  
+}
+
+.sucesso .ui-widget-content .ui-state-default {
+	background: #f0fff0 url(../imagens/jquery/ui-bg_glass_75_f0fff0_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #ccffcc; 
+	color: #00cd00; 
+	font-weight: bold;
+}
+
+.sucesso .ui-widget-content .ui-state-hover {
+	background: #adffad url(../imagens/jquery/ui-bg_glass_75_adffad_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #ccffcc; 
+	color: #00cd00; 
+	font-weight: bold; 
+}
+
+.sucesso .ui-widget-header .ui-icon, .sucesso .ui-dialog-content .ui-icon {
+	background-image: url(../imagens/jquery/ui-icons_00cd00_256x240.png); 
+	height: 16px; 
+	width: 16px; 
+}
+
+/** Dialog de Validação (Amarelo) **/
+.validacao .ui-widget-header {
+	background: #ffe770 url(../imagens/jquery/ui-bg_glass_75_ffe770_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #ffef9e; 
+	color: #f6a828; 
+	font-weight: bold; 
+}
+
+.validacao .ui-widget-header .ui-state-hover, .validacao .ui-widget-header .ui-state-focus, .ui-widget-content.validacao, 
+.validacao .ui-widget-content, .validacao .ui-dialog-content {
+	background: #fffae0 url(../imagens/jquery/ui-bg_glass_75_fffae0_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #ffef9e; 
+	color: #f6a828; 
+}
+
+.validacao .ui-widget-content .ui-state-default {
+	background: #fffae0 url(../imagens/jquery/ui-bg_glass_75_fffae0_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #ffef9e; 
+	color: #f6a828; 
+	font-weight: bold;
+}
+
+.validacao .ui-widget-content .ui-state-hover {
+	background: #ffe770 url(../imagens/jquery/ui-bg_glass_75_ffe770_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #ffef9e; 
+	color: #f6a828; 
+	font-weight: bold; 
+}
+
+.validacao .ui-widget-header .ui-icon, .validacao .ui-dialog-content .ui-icon {
+	background-image: url(../imagens/jquery/ui-icons_f6a828_256x240.png); 
+	height: 16px; 
+	width: 16px; 
+}
+
+/** Dialog de Erro de Banco de Dados (Vermelho) **/
+.erro .ui-widget-header, .erro .ui-widget-content .ui-state-hover {
+	background: #ffd1d2 url(../imagens/jquery/ui-bg_glass_75_ffd1d2_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #ffd6d6; 
+	color: #f00000;
+	font-weight: bold; 
+}
+
+.erro .ui-widget-header .ui-state-hover, .erro .ui-widget-header .ui-state-focus, .ui-widget-content.sucesso, .erro .ui-widget-content, 
+.erro .ui-dialog-content {
+	background: #ffffff url(../imagens/jquery/ui-bg_glass_75_ffffff_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #ffd6d6; 
+	color: #f00000; 
+}
+
+.erro .ui-widget-content .ui-state-default {
+	background: #ffffff url(../imagens/jquery/ui-bg_glass_75_ffffff_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #ffd6d6; 
+	color: #f00000;
+	font-weight: bold;
+}
+
+.erro .ui-widget-content .ui-state-hover {
+	background: #ffd1d2 url(../imagens/jquery/ui-bg_glass_75_ffd1d2_1x400.png) 50% 50% repeat-x; 
+	border: 1px solid #ffd6d6; 
+	color: #f00000;
+	font-weight: bold; 
+}
+
+.erro .ui-widget-header .ui-icon, .erro .ui-dialog-content .ui-icon {
+	background-image: url(../imagens/jquery/ui-icons_f00000_256x240.png); 
+	height: 16px; 
+	width: 16px; 
+}
+
+.erro .ui-dialog.ui-resizable-se {
+	display: none;
+}
+
+
+
+
+
+
+
+
+/** Outros **/
+/*
+a.menu_nivel1_link, a.menu_nivel1_link:hover, a.menu_nivel1_link:link, a.menu_nivel1_link:visited {
+	color: #000066;
+	font-size: 10px;
+	font-weight: bold;
+	line-height: 20px;
+	text-decoration: none;
+	letter-spacing: 1px;
+}
+
+a.menu_item_link, a.menu_item_link:hover, a.menu_item_link:link, a.menu_item_link:visited {
+	color: #464648;
+	font-size: 10px;
+	font-weight: normal;
+	line-height: 20px;
+	text-decoration: none;
+	letter-spacing: 1px;
+}
+
+a.menu_item_link:hover {
+	font-weight: bold;
+}
+
+a.menu_item_link_selecionado, a.menu_item_link_selecionado:hover, a.menu_item_link_selecionado:link, a.menu_item_link_selecionado:visited {
+	color: #000066;
+	font-size: 10px;
+	font-weight: bold;
+	line-height: 20px;
+	text-decoration: none;
+	letter-spacing: 1px;
+}
+
+a.item_link, a.item_link:hover, a.item_link:link, a.item_link:visited {
+	color: #000066;
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: none;
+}
+*/
+
+
+/** Outros **/
+/*
+table.menu_linha {
+	margin-left: 10px;
+	padding-left: 10px;
+	border-bottom: 0px;
+	border-left: 1px solid #000066;
+	border-right: 0px;
+	border-top: 0px;
+}
+
+table.menu_linha_nivel1 {
+	padding-left: 15px;
+	border: 0;
+}
+*/
+/*** Tag span ***/
+/** Formulários das Páginas **/
+/*
+span.campo-esquerda {
+	background: transparent url('../imagens/forms/campo-esquerda.gif') no-repeat top left;
+	display: block;
+	height: 23px;
+	padding-bottom: 0px;
+    padding-left: 4px;
+	padding-right: 0px;
+	padding-top: 0px;
+	float:left;
+}
+
+span.campo-direita {
+	background: transparent url('../imagens/forms/campo-direita.gif') no-repeat top right;
+	display: block;
+	border: 0px;
+	height: 15px;
+    padding: 4px 4px 4px 0;
+	float: left;
+}
+
+span.select-esquerda {
+	background: transparent url('../imagens/forms/select-esquerda.gif') no-repeat top left;
+	display: block;
+	height: 23px;
+    padding-left: 4px;
+}
+
+span.select-direita {
+	background: transparent url('../imagens/forms/select-direita.gif') no-repeat top right;
+	display: block;
+	height: 23px;
+    padding: 1px 4px 0px 0px;
+}
+
+span.textarea-30-esquerda {
+	background: transparent url('../imagens/forms/textarea-30-esquerda.gif') no-repeat top left;
+	display: block;
+	height: 34px;
+    padding-left: 3px;
+}
+*/
+
+
+/*** Tag label ***/
+/** Formulários das Páginas **/
+
+
+/*** Tag input ***/
+/** Formulários das Páginas **/
+/*input {
+	padding: 3px;
+}*/
+
+/*** Tag select ***/
+/** Formulários das Páginas **/
+/*select {
+	padding: 3px;
+}*/
+
+/*** Tag button ***/
+/** Formulários das Páginas **/
+/*button {
+	display: block;
+	height: 23px;
+}*/
+
+
+
+
+
+/*
+button {
+	display: block;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	height: 24px;
+	padding: 0px 0px 0px 0px;
+	line-height: 16px;
+	text-decoration: none;
+}
+
+button.botao_100, button.botao_100_cinza, button.botao_150, button.botao_150_cinza, button.botao_200, button.botao_200_cinza {
+	display: block;
+	border: none;
+	height: 24px;
+	padding: 0px 0px 0px 0px;
+    line-height: 18px;
+}
+
+button.botao_100 {
+	background: transparent url('../imagens/forms/botao_100.gif') no-repeat top left;
+    width: 100px;
+}
+
+button.botao_100_cinza {
+	background: transparent url('../imagens/forms/botao_100_cinza.gif') no-repeat top left;
+    width: 100px;
+}
+
+button.botao_150 {
+	background: transparent url('../imagens/forms/botao_150.gif') no-repeat top left;
+    width: 150px;
+}
+
+button.botao_150_cinza {
+	background: transparent url('../imagens/forms/botao_150_cinza.gif') no-repeat top left;
+    width: 150px;
+}
+
+button.botao_200 {
+	background: transparent url('../imagens/forms/botao_200.gif') no-repeat top left;
+    width: 200px;
+}
+
+button.botao_200_cinza {
+	background: transparent url('../imagens/forms/botao_200_cinza.gif') no-repeat top left;
+    width: 200px;
+}
+*/
+
+/*** Tag textarea ***/
+/** Formulários das Páginas **/
+
+
+/*
+a.link_menu, a.link_menu:link, a.link_menu:visited {
+	display: block;
+	text-decoration: none;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+	font-weight:bold;
+	color:#FFFFFF;
+	text-decoration:none;
+	vertical-align:middle;
+}
+
+a.link_menu_selecionado, a.link_menu_selecionado:link, a.link_menu_selecionado:visited {
+	display: block;
+	text-decoration: none;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+	font-weight:bold;
+	color:#666666;
+	text-decoration:none;
+	vertical-align:middle;
+}
+
+a.link_menu:hover {
+	color:#666666;
+}
+
+a#link_fe {
+	display: block;
+	text-decoration: none;
+	width: 180px;
+	height: 29px;
+	margin: 0 auto;
+	background-image: url('../imagens/cabecalho/cabecalho_links_fe_normal.gif');
+}
+
+a#link_fe:hover {
+	background-image: url('../imagens/cabecalho/cabecalho_links_fe_hover.gif');
+}
+
+a#link_grad {
+	display: block;
+	text-decoration: none;
+	width: 180px;
+	height: 29px;
+	margin: 0 auto;
+	background-image: url('../imagens/cabecalho/cabecalho_links_grad_normal.gif');
+}
+
+a#link_grad:hover {
+	background-image: url('../imagens/cabecalho/cabecalho_links_grad_hover.gif');
+}
+
+a#link_pgrad {
+	display: block;
+	text-decoration: none;
+	width: 180px;
+	height: 29px;
+	margin: 0 auto;
+	background-image: url('../imagens/cabecalho/cabecalho_links_pgrad_normal.gif');
+}
+
+a#link_pgrad:hover {
+	background-image: url('../imagens/cabecalho/cabecalho_links_pgrad_hover.gif');
+}
+
+a#link_pesquisa {
+	display: block;
+	text-decoration: none;
+	width: 180px;
+	height: 29px;
+	margin: 0 auto;
+	background-image: url('../imagens/cabecalho/cabecalho_links_pesquisa_normal.gif');
+}
+
+a#link_pesquisa:hover {
+	background-image: url('../imagens/cabecalho/cabecalho_links_pesquisa_hover.gif');
+}
+
+a#link_cultura {
+	display: block;
+	text-decoration: none;
+	width: 180px;
+	height: 29px;
+	margin: 0 auto;
+	background-image: url('../imagens/cabecalho/cabecalho_links_cultura_normal.gif');
+}
+
+a#link_cultura:hover {
+	background-image: url('../imagens/cabecalho/cabecalho_links_cultura_hover.gif');
+}
+
+.link {
+	display: none;
+}
+*/
+/*** Término do Menu de Links do Cabeçalho da Página ***/
+/*
+A:link {
+    color: #0066CB
+}
+
+A:visited {
+    color: #0066CB
+}
+
+input, select, table, textarea {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color: #333333;
+	text-decoration: none;
+}
+
+select {
+    background-color: #E9E9E9;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+textarea.textarea-30-direita {
+	border-top: none;
+    border-left: none;
+    border-bottom: none;
+    border-right: none;
+    background-color: #E9E9E9;
+	height: 30px;
+}
+
+span.textarea-30-direita {
+	background: transparent url('../imagens/forms/textarea-30-direita.gif') no-repeat top right;
+	display: block;
+    padding: 1px 3px 0px 0px; /*Set 9px below to match value of 'padding-left' value above*/
+	/*
+    height: 34px;
+}
+
+span.textarea-90-esquerda {
+	background: transparent url('../imagens/forms/textarea-90-esquerda.gif') no-repeat top left;
+	display: block;
+    padding-left: 3px; /* Width of left menu image */
+	/*
+    height: 94px;
+}
+
+textarea.textarea-90-direita {
+	border-top: none;
+    border-left: none;
+    border-bottom: none;
+    border-right: none;
+    background-color: #E9E9E9;
+	height: 90px;
+}
+
+span.textarea-90-direita {
+	background: transparent url('../imagens/forms/textarea-90-direita.gif') no-repeat top right;
+	display: block;
+    padding: 1px 3px 0px 0px; /*Set 9px below to match value of 'padding-left' value above*/
+	/*
+    height: 94px;
+}
+
+span.textarea-150-esquerda {
+	background: transparent url('../imagens/forms/textarea-150-esquerda.gif') no-repeat top left;
+	display: block;
+    padding-left: 3px; /* Width of left menu image */
+	/*
+    height: 154px;
+}
+
+textarea.textarea-150-direita {
+	border-top: none;
+    border-left: none;
+    border-bottom: none;
+    border-right: none;
+    background-color: #E9E9E9;
+	height: 150px;
+}
+
+span.textarea-150-direita {
+	background: transparent url('../imagens/forms/textarea-150-direita.gif') no-repeat top right;
+	display: block;
+    padding: 1px 3px 0px 0px; /*Set 9px below to match value of 'padding-left' value above*/
+	/*
+    height: 154px;
+}
+*/

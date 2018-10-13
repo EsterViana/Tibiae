@@ -1,0 +1,146 @@
+/** 
+ * Estilos do Multiselect do jqGrid do JQuery para o Sistema
+ * Data Criação: 27/09/2010
+ * Autor da Criação: Fernando Faria
+ * Data Última Alteração: 27/09/2010
+ * Autor da Alteração: Fernando Faria
+ * Versão: 1 
+ */
+ 
+/* Multiselect
+----------------------------------*/
+
+.ui-multiselect { 
+	border: solid 1px; 
+	font-size: 13px; 
+}
+
+.ui-multiselect ul { 
+	-moz-user-select: none; 
+}
+
+.ui-multiselect li { 
+	cursor: default; 
+	font-size: 11px; 
+	line-height: 20px; 
+	height: 20px; 
+	margin: 0; 
+	padding: 0; 
+	list-style: none; 
+}
+
+.ui-multiselect li a { 
+	color: #999; 
+	cursor: pointer;
+	display: block; 
+	float: left; 
+	text-decoration: none; 
+	padding: 0; 
+}
+
+.ui-multiselect li.ui-draggable-dragging { 
+	padding-left: 10px; 
+}
+
+.ui-multiselect div.selected { 
+	position: relative; 
+	float:left; 
+	border: 0; 
+	margin: 0; 
+	padding: 0; 
+}
+
+.ui-multiselect ul.selected { 
+	background: #fff; 
+	position: relative; 
+	border: 0; 
+	width: 100%; 
+	margin: 0; 
+	padding: 0; 
+	list-style: none; 
+	overflow: auto; 
+	overflow-x: hidden; 
+}
+
+.ui-multiselect ul.selected li { }
+
+.ui-multiselect div.available { 
+	position: relative; 
+	float:left;
+	border: 0; 
+	border-left: 1px solid; 
+	margin: 0; 
+	padding: 0; 
+}
+
+.ui-multiselect ul.available { 
+	background: #fff; 
+	position: relative; 
+	border: 0; 
+	width: 100%; 
+	margin: 0; 
+	padding: 0; 
+	list-style: none; 
+	overflow: auto; 
+	overflow-x: hidden; 
+}
+
+.ui-multiselect ul.available li { 
+	padding-left: 10px; 
+}
+ 
+.ui-multiselect .ui-state-default { 
+	position: relative; 
+	border: none; 
+	margin-bottom: 1px; 
+	padding-left: 20px;
+}
+
+.ui-multiselect .ui-state-hover { 
+	border: none; 
+}
+
+.ui-multiselect .ui-widget-header {
+	border: none; 
+	font-size: 11px; 
+	margin-bottom: 1px;
+}
+ 
+.ui-multiselect .add-all { 
+	float: right; 
+	padding: 7px;
+}
+
+.ui-multiselect .remove-all { 
+	float: right; 
+	padding: 7px;
+}
+	
+.ui-multiselect .search { 
+	float: left; 
+	padding: 4px;
+}
+
+.ui-multiselect .count { 
+	float: left; 
+	padding: 7px;
+}
+
+.ui-multiselect li span.ui-icon-arrowthick-2-n-s { 
+	position: absolute; 
+	left: 2px; 
+}
+
+.ui-multiselect li a.action { 
+	position: absolute; 
+	right: 2px; 
+	top: 2px; 
+}
+ 
+.ui-multiselect input.search { 
+	opacity: 0.5; 
+	height: 14px; 
+	width: 100px; 
+	margin: 4px; 
+	padding: 1px; 
+}
